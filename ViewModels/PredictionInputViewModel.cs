@@ -1,18 +1,19 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel;
 using SeeFrontendTry002.Models.Enumz;
 
-namespace SeeFrontendTry002.Models;
+namespace SeeFrontendTry002.ViewModels;
 
-public class FeatureData
+public class PredictionInputViewModel
 {
-    [Key]
-    public int FeatureSetId { get; set; }
+    // Project or submission metadata
+    [DisplayName("Project Name")]
+    public string ProjectName { get; set; } = string.Empty;
     
-    //One to one Relationship.
-    [ForeignKey("ProjectId")]
-    public int ProjectId { get; set; }
-    public Project? Project { get; set; }
+    public Region? Region { get; set; }
+    
+    [DisplayName("Prediction Model")]
+    public PredictionModel PredictionModelName { get; set; }
+    
     
     //Environments
     public bool DevEnvironment { get; set; }
@@ -66,7 +67,4 @@ public class FeatureData
     public int SoapIntegrationPoints { get; set; }
     public int Iso8583IntegrationPoints { get; set; }
     public int SdkIntegrationPoints { get; set; }
-    
-    //One to many
-    public ICollection<PredictionResult>? PredictionResults { get; set; }
 }

@@ -1,0 +1,6 @@
+﻿services:
+  seefrontendtry002:
+    image: seefrontendtry002
+    build:
+      context: .
+      dockerfile: Dockerfile

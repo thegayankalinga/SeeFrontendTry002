@@ -14,15 +14,6 @@ public class Project
     
     public required Region Region { get; set; }
     
-    
-    
-    //Results
-    public float Delivery { get; set; }
-    public float Engineering { get; set; }
-    public float DevOps { get; set; }
-    public float Qa { get; set; }
-    
-    
     // FK to AppUser
     [MaxLength(450)]
     public string? ProjectManagerId { get; set; }
@@ -36,4 +27,7 @@ public class Project
     
     //Navigation Properties (One to one Relationship.)
     public FeatureData? FeatureData { get; set; }
+    
+    //Navigation One to Many
+    public ICollection<PredictionResult>? PredictionResults { get; set; }
 }

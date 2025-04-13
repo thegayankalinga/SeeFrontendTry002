@@ -1,18 +1,12 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using SeeFrontendTry002.Models;
 using SeeFrontendTry002.Models.Enumz;
 
-namespace SeeFrontendTry002.Models;
+namespace SeeFrontendTry002.Dtos;
 
-public class FeatureData
+public class FeatureDataResponseDto
 {
-    [Key]
+    //One to One Data (Feature Data
     public int FeatureSetId { get; set; }
-    
-    //One to one Relationship.
-    [ForeignKey("ProjectId")]
-    public int ProjectId { get; set; }
-    public Project? Project { get; set; }
     
     //Environments
     public bool DevEnvironment { get; set; }
@@ -68,5 +62,5 @@ public class FeatureData
     public int SdkIntegrationPoints { get; set; }
     
     //One to many
-    public ICollection<PredictionResult>? PredictionResults { get; set; }
+    public ICollection<PredictionResult>? PredictionResultsFromFeatureData { get; set; }
 }

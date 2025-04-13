@@ -1,20 +1,10 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using SeeFrontendTry002.Models.Enumz;
 
-namespace SeeFrontendTry002.Models;
+namespace SeeFrontendTry002.Dtos;
 
-public class FeatureData
+public class FeatureDataSaveRequestDto
 {
-    [Key]
-    public int FeatureSetId { get; set; }
-    
-    //One to one Relationship.
-    [ForeignKey("ProjectId")]
-    public int ProjectId { get; set; }
-    public Project? Project { get; set; }
-    
-    //Environments
+     //Environments
     public bool DevEnvironment { get; set; }
     public bool SitEnvironment { get; set; }
     public bool UatEnvironment { get; set; }
@@ -66,7 +56,4 @@ public class FeatureData
     public int SoapIntegrationPoints { get; set; }
     public int Iso8583IntegrationPoints { get; set; }
     public int SdkIntegrationPoints { get; set; }
-    
-    //One to many
-    public ICollection<PredictionResult>? PredictionResults { get; set; }
 }
