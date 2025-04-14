@@ -12,4 +12,6 @@ public interface IProjectRepository
 
     Task<bool> SavePredictionResultAsync(int projectId, int featureSetId, PredictionModel predictionModel,
         PredictionApiResponseDto dto);
+
+    Task<bool> UpdateCalculationStatusAsync(int projectId, CalculationStatusType status);
 }

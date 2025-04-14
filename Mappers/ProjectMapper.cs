@@ -18,6 +18,7 @@ public static class ProjectMapper
         {
             ProjectName = dto.ProjectName,
             Region = dto.Region,
+            CalculationStatus = dto.CalculationStatus,
         };
 
         var feature = dto.FeatureData;
@@ -95,6 +96,7 @@ public static class ProjectMapper
             ProjectId = project.ProjectId,
             ProjectName = project.ProjectName,
             Region = project.Region,
+            CalculationStatus = project.CalculationStatus,
             FeatureData = new FeatureDataResponseDto
             {
                 FeatureSetId = featureData.FeatureSetId,
@@ -157,6 +159,7 @@ public static class ProjectMapper
         {
             ProjectName = vm.ProjectName,
             Region = vm.Region ?? Region.Gcc,
+            CalculationStatus = CalculationStatusType.Pending,
 
             FeatureData = new FeatureDataSaveRequestDto
             {

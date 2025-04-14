@@ -7,6 +7,8 @@ public class PredictionRequestSaveDto
     
     public required string ProjectName { get; set; }
     public required Region Region { get; set; }
+
+    public CalculationStatusType CalculationStatus { get; set; } = CalculationStatusType.Pending;
     public required FeatureDataSaveRequestDto FeatureData { get; set; }
 
 }

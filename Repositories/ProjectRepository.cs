@@ -18,7 +18,27 @@ public class ProjectRepository: IProjectRepository
         _context = context;
         _logger = logger;
     }
-    
+
+    public async Task<bool> UpdateCalculationStatusAsync(int projectId, CalculationStatusType status)
+    {
+        var project = await _context.Projects.FindAsync(projectId);
+        
+        if (project is null)
+        {
+            return false;
+        }
+        
+        // Update the status
+        project.CalculationStatus = status;
+
+        // Mark entity as modified (optional, EF should detect this)
+        _context.Projects.Update(project);
+
+        // Save changes to the database
+        await _context.SaveChangesAsync();
+
+        return true;
+    }
     
     
     public async Task<PredictionResponseDetailsDto?> SaveProjectWithFeaturesAsync(

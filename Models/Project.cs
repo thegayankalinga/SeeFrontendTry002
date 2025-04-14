@@ -14,6 +14,8 @@ public class Project
     
     public required Region Region { get; set; }
     
+    public CalculationStatusType CalculationStatus { get; set; }
+    
     // FK to AppUser
     [MaxLength(450)]
     public string? ProjectManagerId { get; set; }

@@ -73,8 +73,12 @@ public class PredictionController : Controller
         var apiRequestDto = PredictionApiRequestMapper.ResponseDetailsToApiRequest(savedResult, predictionInputViewModel.PredictionModelName);
         
         var apiPredictionResultDto = await _predictionService.PredictAsync(apiRequestDto);
+
+        bool updateResult = false;
         if (apiPredictionResultDto is null)
-        {
+        {   
+            updateResult =
+                await _projectRepository.UpdateCalculationStatusAsync(savedResult.ProjectId, CalculationStatusType.Failed);
             _logger.LogError($"Project {saveDto.ProjectName} Was null.");
             return View("Error");
         }
@@ -85,9 +89,22 @@ public class PredictionController : Controller
             apiPredictionResultDto.Predictions.QaEffort);
         
         var savePredictionResult = await _projectRepository.SavePredictionResultAsync(savedResult.ProjectId, savedResult.FeatureData.FeatureSetId, predictionInputViewModel.PredictionModelName, apiPredictionResultDto);
+        
+        
         if (savePredictionResult is false)
         {
+            updateResult =
+                await _projectRepository.UpdateCalculationStatusAsync(savedResult.ProjectId, CalculationStatusType.Failed);
             _logger.LogError($"Project {saveDto.ProjectName} could not be saved.");
+            return View("Error");
+        }
+        
+        updateResult =
+            await _projectRepository.UpdateCalculationStatusAsync(savedResult.ProjectId, CalculationStatusType.Success);
+
+        if (!updateResult)
+        {
+            _logger.LogError($"Project {saveDto.ProjectName} could not be updated with the status.");
             return View("Error");
         }
         return View("PredictionResult", apiPredictionResultDto);

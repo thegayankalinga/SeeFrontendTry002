@@ -10,6 +10,8 @@ public class PredictionResponseDetailsDto
     public required string ProjectName { get; set; }
     public required Region Region { get; set; }
     
+    public CalculationStatusType CalculationStatus { get; set; }
+    
     public required FeatureDataResponseDto FeatureData { get; set; }
     
     //One to many lists

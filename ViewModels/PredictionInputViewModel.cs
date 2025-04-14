@@ -11,6 +11,8 @@ public class PredictionInputViewModel
     
     public Region? Region { get; set; }
     
+    public CalculationStatusType? CalculationStatusType { get; set; }
+    
     [DisplayName("Prediction Model")]
     public PredictionModel PredictionModelName { get; set; }
     
