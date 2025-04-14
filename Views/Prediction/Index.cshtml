@@ -1,48 +1,208 @@
+```cshtml
+@using SeeFrontendTry002.Models.Enumz
 @model IEnumerable<SeeFrontendTry002.Dtos.PredictionResponseDetailsDto>
 @{
     ViewData["Title"] = "Projects Overview";
     var search = ViewData["SearchName"] as string ?? "";
 }
 
-<div class="max-w-7xl mx-auto mt-10 px-4">
-    <div class="flex justify-between items-center mb-6">
-        <h2 class="text-2xl font-bold text-gray-800">Saved Projects</h2>
-        <a asp-action="Step1" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">+ Add New</a>
-    </div>
+<div class="bg-white rounded-xl shadow-md overflow-hidden">
+    <div class="p-6">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900">Projects Overview</h1>
+                <p class="text-sm text-gray-500 mt-1">Manage and track your software effort estimation projects</p>
+            </div>
+            <div class="mt-4 md:mt-0">
+                <a asp-action="Step1" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 shadow-sm transition-colors duration-200">
+                    <i class="fas fa-plus mr-2"></i> Create New Project
+                </a>
+            </div>
+        </div>
 
-    <form method="get" class="mb-4">
-        <input type="text" name="searchName" value="@search"
-               placeholder="Search by Project Name"
-               class="w-full sm:w-64 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" />
-    </form>
+        <div class="bg-gray-50 p-4 rounded-lg mb-6">
+            <div class="flex flex-col md:flex-row md:items-center gap-4">
+                <div class="flex-grow">
+                    <form method="get" class="flex items-center">
+                        <div class="relative flex-grow">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-search text-gray-400"></i>
+                            </div>
+                            <input type="text" name="searchName" value="@search" placeholder="Search by project name..."
+                                   class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                        </div>
+                        <button type="submit" class="ml-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            <i class="fas fa-filter mr-2"></i> Search
+                        </button>
+                    </form>
+                </div>
+                <div>
+                    <select class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                        <option>Sort by: Recently Updated</option>
+                        <option>Sort by: Name A-Z</option>
+                        <option>Sort by: Name Z-A</option>
+                        <option>Sort by: Region</option>
+                    </select>
+                </div>
+            </div>
+        </div>
 
-    <div class="overflow-x-auto bg-white shadow-md rounded-xl">
-        <table class="min-w-full table-auto text-left text-sm text-gray-700">
-            <thead class="bg-gray-100 text-xs uppercase">
-                <tr>
-                    <th class="px-6 py-4">ID</th>
-                    <th class="px-6 py-4">Project Name</th>
-                    <th class="px-6 py-4">Region</th>
-                    <th class="px-6 py-4">Prediction Model</th>
-                    <th class="px-6 py-4">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var project in Model)
-                {
-                    <tr class="border-b hover:bg-gray-50">
-                        <td class="px-6 py-4">@project.ProjectId</td>
-                        <td class="px-6 py-4">@project.ProjectName</td>
-                        <td class="px-6 py-4">@project.Region</td>
-                        @* <td class="px-6 py-4">@project.PredictionModel</td> *@
-                        <td class="px-6 py-4 space-x-2">
-                            <a href="#" class="text-blue-600 hover:underline">View FeatureData</a>
-                            <a href="#" class="text-green-600 hover:underline">View Result</a>
-                            <a href="#" class="text-indigo-600 hover:underline">Calculate Result</a>
-                        </td>
+        <!-- Project statistics summary -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <div class="bg-blue-50 rounded-lg p-4 border border-blue-200">
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-blue-500 bg-opacity-10">
+                        <i class="fas fa-folder text-blue-500 text-xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-lg font-semibold text-gray-900">@Model.Count()</h3>
+                        <p class="text-sm text-gray-500">Total Projects</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-green-50 rounded-lg p-4 border border-green-200">
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-green-500 bg-opacity-10">
+                        <i class="fas fa-check-circle text-green-500 text-xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-lg font-semibold text-gray-900">@Model.Count(m => m.Region == Region.Apac)</h3>
+                        <p class="text-sm text-gray-500">APAC Projects</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-purple-50 rounded-lg p-4 border border-purple-200">
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-purple-500 bg-opacity-10">
+                        <i class="fas fa-chart-line text-purple-500 text-xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-lg font-semibold text-gray-900">@Model.Count(m => m.Region != Region.Apac)</h3>
+                        <p class="text-sm text-gray-500">Other Regions</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects table -->
+        <div class="overflow-x-auto rounded-lg border border-gray-200">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <div class="flex items-center">
+                                ID
+                                <button class="ml-1 text-gray-400 hover:text-gray-500">
+                                    <i class="fas fa-sort"></i>
+                                </button>
+                            </div>
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <div class="flex items-center">
+                                Project Name
+                                <button class="ml-1 text-gray-400 hover:text-gray-500">
+                                    <i class="fas fa-sort"></i>
+                                </button>
+                            </div>
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <div class="flex items-center">
+                                Region
+                                <button class="ml-1 text-gray-400 hover:text-gray-500">
+                                    <i class="fas fa-sort"></i>
+                                </button>
+                            </div>
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Status
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Actions
+                        </th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    @if (Model.Any())
+                    {
+                        @foreach (var project in Model)
+                        {
+                            <tr class="hover:bg-gray-50 transition-colors duration-150">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    #@project.ProjectId
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-project-diagram text-indigo-500 mr-2"></i>
+                                        <span>@project.ProjectName</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                                        @(project.Region == Region.Apac ? "bg-green-100 text-green-800" : 
+                                        project.Region == Region.Europe ? "bg-blue-100 text-blue-800" : 
+                                        "bg-purple-100 text-purple-800")">
+                                        @project.Region
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                        <i class="fas fa-clock mr-1"></i> Pending
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <div class="flex justify-end space-x-2">
+                                        <a href="#" class="text-indigo-600 hover:text-indigo-900 bg-indigo-50 hover:bg-indigo-100 p-1 rounded transition-colors duration-150" title="View Details">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a href="#" class="text-green-600 hover:text-green-900 bg-green-50 hover:bg-green-100 p-1 rounded transition-colors duration-150" title="View Results">
+                                            <i class="fas fa-chart-bar"></i>
+                                        </a>
+                                        <a href="#" class="text-blue-600 hover:text-blue-900 bg-blue-50 hover:bg-blue-100 p-1 rounded transition-colors duration-150" title="Calculate">
+                                            <i class="fas fa-calculator"></i>
+                                        </a>
+                                        <a href="#" class="text-red-600 hover:text-red-900 bg-red-50 hover:bg-red-100 p-1 rounded transition-colors duration-150" title="Delete">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="5" class="px-6 py-12 text-center">
+                                <div class="flex flex-col items-center">
+                                    <i class="fas fa-folder-open text-gray-300 text-5xl mb-4"></i>
+                                    <h3 class="text-lg font-medium text-gray-900">No projects found</h3>
+                                    <p class="text-gray-500 mt-1">Get started by creating a new project</p>
+                                    <a asp-action="Step1" class="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                        <i class="fas fa-plus mr-2"></i> Create New Project
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <nav class="flex items-center justify-between p-4" aria-label="Pagination">
+            <div class="hidden sm:block">
+                <p class="text-sm text-gray-700">
+                    Showing <span class="font-medium">1</span> to <span class="font-medium">@Model.Count()</span> of <span class="font-medium">@Model.Count()</span> results
+                </p>
+            </div>
+            <div class="flex-1 flex justify-end">
+                <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                    Previous
+                </a>
+                <a href="#" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                    Next
+                </a>
+            </div>
+        </nav>
     </div>
 </div>
+```
