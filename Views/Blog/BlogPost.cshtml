@@ -1,0 +1,15 @@
+@{
+    ViewData["Title"] = ViewData["Title"] ?? "Blog Post";
+    Layout = "_Layout";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <h1>@ViewData["Title"]</h1>
+            <div class="markdown-content">
+                @Html.Raw(ViewData["Content"])
+            </div>
+        </div>
+    </div>
+</div>

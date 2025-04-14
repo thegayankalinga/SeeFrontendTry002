@@ -18,12 +18,14 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
     });
 
+
 builder.Services.AddHttpClient<IPredictionService, PredictionService>();
+
+builder.Services.AddSingleton<MarkdownService>();
 
 builder.Services.AddScoped<IUserProfileRepository, UserProfileRepository>();
 builder.Services.AddScoped<IAppUserRepository, AppUserRepository>();
 builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
-
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
