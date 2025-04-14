@@ -21,6 +21,7 @@
                     <div class="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium text-gray-500">Project Info</div>
                 </div>
                 <div class="flex-auto border-t-2 border-green-500"></div>
+                
                 <div class="flex items-center relative">
                     <div class="rounded-full h-12 w-12 py-3 border-2 bg-green-500 border-green-500 text-white font-bold flex items-center justify-center">
                         <i class="fas fa-check text-sm"></i>
@@ -28,6 +29,7 @@
                     <div class="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium text-gray-500">Compliance & Tech</div>
                 </div>
                 <div class="flex-auto border-t-2 border-green-500"></div>
+                
                 <div class="flex items-center relative">
                     <div class="rounded-full h-12 w-12 py-3 border-2 bg-green-500 border-green-500 text-white font-bold flex items-center justify-center">
                         <i class="fas fa-check text-sm"></i>
@@ -35,6 +37,7 @@
                     <div class="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium text-gray-500">Architecture</div>
                 </div>
                 <div class="flex-auto border-t-2 border-green-500"></div>
+                
                 <div class="flex items-center relative">
                     <div class="rounded-full h-12 w-12 py-3 border-2 border-indigo-600 bg-indigo-600 text-white font-bold flex items-center justify-center">
                         4
@@ -42,6 +45,7 @@
                     <div class="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium text-indigo-600">Integration</div>
                 </div>
                 <div class="flex-auto border-t-2 border-gray-300"></div>
+                
                 <div class="flex items-center relative">
                     <div class="rounded-full h-12 w-12 py-3 border-2 border-gray-300 bg-white text-gray-400 font-bold flex items-center justify-center">
                         5
@@ -55,9 +59,10 @@
             <!-- Performance Section -->
             <div class="bg-gray-50 p-6 rounded-lg mb-6 shadow-sm">
                 <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-                    <i class="fas fa-cogs text-indigo-500 mr-2"></i>
-                    Performance & QA Metrics
+                    <i class="fas fa-tachometer-alt text-indigo-500 mr-2"></i>
+                    Performance Metrics
                 </h2>
+                
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label asp-for="TpsRequired" class="block text-sm font-medium text-gray-700 mb-1">
@@ -67,10 +72,14 @@
                             <div class="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
                                 <i class="fas fa-tachometer-alt text-gray-400 text-sm"></i>
                             </div>
-                            <input asp-for="TpsRequired" type="number" class="pl-10 pr-4 py-2 h-10 w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" />
+                            <input asp-for="TpsRequired" type="number" min="1" 
+                                   class="pl-10 pr-4 py-2 h-10 w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" 
+                                   placeholder="Enter TPS required" required />
                         </div>
                         <span asp-validation-for="TpsRequired" class="text-red-500 text-xs mt-1"></span>
+                        <p class="mt-1 text-xs text-gray-500">Transactions per second</p>
                     </div>
+
                     <div>
                         <label asp-for="WarrantyMonths" class="block text-sm font-medium text-gray-700 mb-1">
                             Warranty Period (Months) <span class="text-red-500">*</span>
@@ -79,46 +88,181 @@
                             <div class="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
                                 <i class="fas fa-calendar-alt text-gray-400 text-sm"></i>
                             </div>
-                            <input asp-for="WarrantyMonths" type="number" class="pl-10 pr-4 py-2 h-10 w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" />
+                            <input asp-for="WarrantyMonths" type="number" min="1" 
+                                   class="pl-10 pr-4 py-2 h-10 w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" 
+                                   placeholder="Enter warranty period" required />
                         </div>
                         <span asp-validation-for="WarrantyMonths" class="text-red-500 text-xs mt-1"></span>
                     </div>
+                </div>
+            </div>
+
+            <!-- Modules Section -->
+            <div class="bg-gray-50 p-6 rounded-lg mb-6 shadow-sm">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-cubes text-indigo-500 mr-2"></i>
+                    Functional Breakdown
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label asp-for="NoOfFunctionalModules" class="block text-sm font-medium text-gray-700 mb-1">
-                            Functional Modules
+                            Functional Modules <span class="text-red-500">*</span>
                         </label>
                         <div class="relative">
                             <div class="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
                                 <i class="fas fa-cube text-gray-400 text-sm"></i>
                             </div>
-                            <input asp-for="NoOfFunctionalModules" type="number" class="pl-10 pr-4 py-2 h-10 w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" />
+                            <input asp-for="NoOfFunctionalModules" type="number" min="1"
+                                   class="pl-10 pr-4 py-2 h-10 w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" 
+                                   placeholder="Enter number of modules" required />
                         </div>
                         <span asp-validation-for="NoOfFunctionalModules" class="text-red-500 text-xs mt-1"></span>
+                        <p class="mt-1 text-xs text-gray-500">Core business functionality modules</p>
                     </div>
+
                     <div>
                         <label asp-for="NoOfNoneFunctionalModules" class="block text-sm font-medium text-gray-700 mb-1">
-                            Non-Functional Modules
+                            Non-Functional Modules <span class="text-red-500">*</span>
                         </label>
                         <div class="relative">
                             <div class="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
                                 <i class="fas fa-cubes text-gray-400 text-sm"></i>
                             </div>
-                            <input asp-for="NoOfNoneFunctionalModules" type="number" class="pl-10 pr-4 py-2 h-10 w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" />
+                            <input asp-for="NoOfNoneFunctionalModules" type="number" min="0" 
+                                   class="pl-10 pr-4 py-2 h-10 w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" 
+                                   placeholder="Enter number of modules" required />
                         </div>
                         <span asp-validation-for="NoOfNoneFunctionalModules" class="text-red-500 text-xs mt-1"></span>
+                        <p class="mt-1 text-xs text-gray-500">Security, performance, logging modules</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Navigation -->
+            <!-- QA Section -->
+            <div class="bg-gray-50 p-6 rounded-lg mb-6 shadow-sm">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-check-circle text-indigo-500 mr-2"></i>
+                    Quality Assurance
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label asp-for="NoOfUatCycles" class="block text-sm font-medium text-gray-700 mb-1">
+                            UAT Cycles <span class="text-red-500">*</span>
+                        </label>
+                        <div class="relative">
+                            <div class="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                <i class="fas fa-sync-alt text-gray-400 text-sm"></i>
+                            </div>
+                            <input asp-for="NoOfUatCycles" type="number" min="1" 
+                                   class="pl-10 pr-4 py-2 h-10 w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" 
+                                   placeholder="Enter UAT cycles" required />
+                        </div>
+                        <span asp-validation-for="NoOfUatCycles" class="text-red-500 text-xs mt-1"></span>
+                        <p class="mt-1 text-xs text-gray-500">User acceptance testing cycles</p>
+                    </div>
+
+                    <div>
+                        <label asp-for="CodeTestCoverage" class="block text-sm font-medium text-gray-700 mb-1">
+                            Code Test Coverage (%)
+                        </label>
+                        <div class="relative">
+                            <div class="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                <i class="fas fa-code text-gray-400 text-sm"></i>
+                            </div>
+                            <input asp-for="CodeTestCoverage" type="number" min="0" max="100" step="0.1" 
+                                   class="pl-10 pr-4 py-2 h-10 w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" 
+                                   placeholder="Enter test coverage percentage" />
+                        </div>
+                        <span asp-validation-for="CodeTestCoverage" class="text-red-500 text-xs mt-1"></span>
+                        <p class="mt-1 text-xs text-gray-500">Percentage of code covered by tests</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Integration Section -->
+            <div class="bg-gray-50 p-6 rounded-lg mb-6 shadow-sm">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-plug text-indigo-500 mr-2"></i>
+                    Integration Points
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label asp-for="RestIntegrationPoints" class="block text-sm font-medium text-gray-700 mb-1">
+                            REST Integration Points <span class="text-red-500">*</span>
+                        </label>
+                        <div class="relative">
+                            <div class="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                <i class="fas fa-exchange-alt text-gray-400 text-sm"></i>
+                            </div>
+                            <input asp-for="RestIntegrationPoints" type="number" min="0" 
+                                   class="pl-10 pr-4 py-2 h-10 w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" 
+                                   placeholder="Enter REST endpoints" required />
+                        </div>
+                        <span asp-validation-for="RestIntegrationPoints" class="text-red-500 text-xs mt-1"></span>
+                    </div>
+
+                    <div>
+                        <label asp-for="SoapIntegrationPoints" class="block text-sm font-medium text-gray-700 mb-1">
+                            SOAP Integration Points
+                        </label>
+                        <div class="relative">
+                            <div class="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                <i class="fas fa-exchange-alt text-gray-400 text-sm"></i>
+                            </div>
+                            <input asp-for="SoapIntegrationPoints" type="number" min="0" 
+                                   class="pl-10 pr-4 py-2 h-10 w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" 
+                                   placeholder="Enter SOAP services" />
+                        </div>
+                        <span asp-validation-for="SoapIntegrationPoints" class="text-red-500 text-xs mt-1"></span>
+                    </div>
+
+                    <div>
+                        <label asp-for="Iso8583IntegrationPoints" class="block text-sm font-medium text-gray-700 mb-1">
+                            ISO8583 Integration Points
+                        </label>
+                        <div class="relative">
+                            <div class="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                <i class="fas fa-credit-card text-gray-400 text-sm"></i>
+                            </div>
+                            <input asp-for="Iso8583IntegrationPoints" type="number" min="0" 
+                                   class="pl-10 pr-4 py-2 h-10 w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" 
+                                   placeholder="Enter ISO8583 integration points" />
+                        </div>
+                        <span asp-validation-for="Iso8583IntegrationPoints" class="text-red-500 text-xs mt-1"></span>
+                        <p class="mt-1 text-xs text-gray-500">Financial messaging standard</p>
+                    </div>
+
+                    <div>
+                        <label asp-for="SdkIntegrationPoints" class="block text-sm font-medium text-gray-700 mb-1">
+                            SDK Integration Points
+                        </label>
+                        <div class="relative">
+                            <div class="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                <i class="fas fa-puzzle-piece text-gray-400 text-sm"></i>
+                            </div>
+                            <input asp-for="SdkIntegrationPoints" type="number" min="0" 
+                                   class="pl-10 pr-4 py-2 h-10 w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" 
+                                   placeholder="Enter SDK integrations" />
+                        </div>
+                        <span asp-validation-for="SdkIntegrationPoints" class="text-red-500 text-xs mt-1"></span>
+                        <p class="mt-1 text-xs text-gray-500">3rd party SDK integrations</p>
+                    </div>
+                </div>
+            </div>
+
             <div class="mt-8 flex items-center justify-between">
                 <a asp-action="Step3" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    <i class="fas fa-arrow-left mr-2"></i> Previous
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    Previous
                 </a>
                 <div>
                     <span class="text-sm text-gray-500 mr-4">Step 4 of 5</span>
                     <button type="submit" class="inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-150">
-                        Continue <i class="fas fa-arrow-right ml-2"></i>
+                        Continue
+                        <i class="fas fa-arrow-right ml-2"></i>
                     </button>
                 </div>
             </div>
