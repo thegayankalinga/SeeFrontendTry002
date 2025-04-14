@@ -50,12 +50,10 @@ public class PredictionController : Controller
         var apiRequestDto = PredictionApiRequestMapper.ResponseDetailsToApiRequest(project, predictionModel);
         
         var apiPredictionResultDto = await _predictionService.PredictAsync(apiRequestDto);
-
-        bool updateResult = false;
+        
         if (apiPredictionResultDto is null)
         {   
-            updateResult =
-                await _projectRepository.UpdateCalculationStatusAsync(project.ProjectId, CalculationStatusType.Failed);
+            await _projectRepository.UpdateCalculationStatusAsync(project.ProjectId, CalculationStatusType.Failed);
             _logger.LogError($"Project {project.ProjectName} Was null.");
             return RedirectToAction("Error", "Home");
         }
@@ -64,9 +62,17 @@ public class PredictionController : Controller
             apiPredictionResultDto.Predictions.EngineeringEffort,
             apiPredictionResultDto.Predictions.DevOpsEffort,
             apiPredictionResultDto.Predictions.QaEffort);
+
         
-        updateResult =
-            await _projectRepository.UpdateCalculationStatusAsync(project.ProjectId, CalculationStatusType.Success);
+        await _projectRepository.SavePredictionResultAsync(
+                project.ProjectId, 
+                project.FeatureData.FeatureSetId,
+                predictionModel,
+                apiPredictionResultDto);
+        
+        var updateResult = await _projectRepository.UpdateCalculationStatusAsync(
+                            project.ProjectId, 
+                            CalculationStatusType.Success);
 
         if (!updateResult)
         {
@@ -75,6 +81,7 @@ public class PredictionController : Controller
         }
         
         var result = await _projectRepository.GetPredictedResulstsByProjectIdAsync(projectId);
+        
         var vm = new ResultViewModel
         {
             ProjectId = projectId,
@@ -208,12 +215,95 @@ public class PredictionController : Controller
         }
         
     }
-
-    public async Task<IActionResult> Calculate()
+    
+    // Delete a project
+    [HttpPost]
+    public async Task<IActionResult> DeleteProject(int id)
     {
-        return View();
+        try
+        {
+            var result = await _projectRepository.DeleteProjectAsync(id);
+        
+            if (result)
+            {
+                // If using AJAX, return JSON result
+                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                    return Json(new { success = true, message = "Project deleted successfully" });
+                
+                // For regular form posts, redirect with success message
+                TempData["SuccessMessage"] = "Project deleted successfully";
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                // If using AJAX, return JSON error
+                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                    return Json(new { success = false, message = "Failed to delete project" });
+                
+                // For regular form posts, redirect with error message
+                TempData["ErrorMessage"] = "Failed to delete project";
+                return RedirectToAction(nameof(Index));
+            }
+        }
+        catch (Exception ex)
+        {
+            // Log the exception
+            _logger.LogError(ex, "Error deleting project with ID {ProjectId}", id);
+        
+            // If using AJAX, return JSON error
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                return Json(new { success = false, message = "An error occurred while deleting the project" });
+            
+            // For regular form posts, redirect with error message
+            TempData["ErrorMessage"] = "An error occurred while deleting the project";
+            return RedirectToAction(nameof(Index));
+        }
     }
-
+    
+    // Delete a prediction result
+    [HttpPost]
+    public async Task<IActionResult> DeletePredictionResult(int resultId, int projectId, int featureId)
+    {
+        try
+        {
+            var result = await _projectRepository.DeletePredictionResultAsync(resultId);
+            
+            if (result)
+            {
+                // If using AJAX, return JSON result
+                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                    return Json(new { success = true, message = "Prediction result deleted successfully" });
+                    
+                // For regular form posts, redirect with success message
+                TempData["SuccessMessage"] = "Prediction result deleted successfully";
+                return RedirectToAction(nameof(Results), new { projectId = projectId, featureId = featureId });
+            }
+            else
+            {
+                // If using AJAX, return JSON error
+                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                    return Json(new { success = false, message = "Failed to delete prediction result" });
+                    
+                // For regular form posts, redirect with error message
+                TempData["ErrorMessage"] = "Failed to delete prediction result";
+                return RedirectToAction(nameof(Results), new { projectId = projectId, featureId = featureId });
+            }
+        }
+        catch (Exception ex)
+        {
+            // Log the exception
+            _logger.LogError(ex, "Error deleting prediction result with ID {ResultId}", resultId);
+            
+            // If using AJAX, return JSON error
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                return Json(new { success = false, message = "An error occurred while deleting the prediction result" });
+                
+            // For regular form posts, redirect with error message
+            TempData["ErrorMessage"] = "An error occurred while deleting the prediction result";
+            return RedirectToAction(nameof(Results), new { projectId = projectId, featureId = featureId });
+        }
+    }
+    
     #region Stepper
         
     #region Step1

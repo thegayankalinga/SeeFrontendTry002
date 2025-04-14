@@ -130,4 +130,74 @@ public class ProjectRepository: IProjectRepository
         return dtos;
     }
 
+    public async Task<bool> DeleteProjectAsync(int projectId)
+    {
+        // Start a transaction to ensure all related data is deleted
+        using var transaction = await _context.Database.BeginTransactionAsync();
+        try
+        {
+            // Get the project
+            var project = await _context.Projects
+                .Include(p => p.FeatureData)
+                .Include(p => p.PredictionResults)
+                .FirstOrDefaultAsync(p => p.ProjectId == projectId);
+                
+            if (project == null)
+                return false;
+                
+            // Remove prediction results first (to avoid foreign key constraints)
+            if (project.PredictionResults != null && project.PredictionResults.Any())
+            {
+                _context.PredictionResults.RemoveRange(project.PredictionResults);
+            }
+            
+            // Remove feature data
+            if (project.FeatureData != null)
+            {
+                _context.FeatureData.Remove(project.FeatureData);
+            }
+            
+            // Finally remove the project
+            _context.Projects.Remove(project);
+            
+            // Save changes
+            await _context.SaveChangesAsync();
+            
+            // Commit the transaction
+            await transaction.CommitAsync();
+            
+            return true;
+        }
+        catch (Exception)
+        {
+            // Rollback the transaction if anything fails
+            await transaction.RollbackAsync();
+            return false;
+        }
+    }
+    
+    public async Task<bool> DeletePredictionResultAsync(int resultId)
+    {
+        try
+        {
+            // Find the prediction result
+            var result = await _context.PredictionResults.FindAsync(resultId);
+            
+            if (result == null)
+                return false;
+                
+            // Remove the prediction result
+            _context.PredictionResults.Remove(result);
+            
+            // Save changes
+            await _context.SaveChangesAsync();
+            
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
+    }
+    
 }

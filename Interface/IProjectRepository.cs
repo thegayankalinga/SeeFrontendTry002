@@ -16,4 +16,8 @@ public interface IProjectRepository
     Task<bool> UpdateCalculationStatusAsync(int projectId, CalculationStatusType status);
 
     Task<List<PredictionResultResponseDto>> GetPredictedResulstsByProjectIdAsync(int projectId);
+
+    Task<bool> DeleteProjectAsync(int projectId);
+    Task<bool> DeletePredictionResultAsync(int resultId);
+
 }
