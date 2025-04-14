@@ -1,123 +1,352 @@
+
 @model SeeFrontendTry002.ViewModels.PredictionInputViewModel
 @using SeeFrontendTry002.Models.Enumz
 
 @{
-    ViewData["Title"] = "Step 2 - Compliance & Technology";
+    ViewData["Title"] = "Compliance & Technology";
 }
 
-<div class="max-w-4xl mx-auto p-8 mt-10 bg-white rounded-xl shadow-lg">
-    <!-- Stepper UI -->
-    <div class="flex justify-between mb-6">
-        @for (int i = 1; i <= 5; i++)
-        {
-            var stepColor = i == 2 ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-700";
-            <div class="text-center w-1/5">
-                <div class="h-10 w-10 mx-auto rounded-full @stepColor flex items-center justify-center font-bold">@i</div>
-                <div class="mt-2 text-sm text-gray-600">Step @i</div>
+<div class="bg-white rounded-xl shadow-md overflow-hidden">
+    <div class="p-6">
+        <div class="mb-6">
+            <h1 class="text-2xl font-bold text-gray-900">New Project</h1>
+            <p class="text-sm text-gray-500 mt-1">Step 2: Compliance, Tech Stack, SSO & Infrastructure</p>
+        </div>
+
+        <!-- Progress steps -->
+        <div class="mb-8">
+            <div class="flex items-center w-full">
+                <div class="flex items-center relative">
+                    <div class="rounded-full transition duration-500 ease-in-out h-12 w-12 py-3 border-2 bg-green-500 border-green-500 text-white font-bold flex items-center justify-center">
+                        <i class="fas fa-check text-sm"></i>
+                    </div>
+                    <div class="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium text-gray-500">Project Info</div>
+                </div>
+                <div class="flex-auto border-t-2 transition duration-500 ease-in-out border-green-500"></div>
+                
+                <div class="flex items-center relative">
+                    <div class="rounded-full transition duration-500 ease-in-out h-12 w-12 py-3 border-2 border-indigo-600 bg-indigo-600 text-white font-bold flex items-center justify-center">
+                        2
+                    </div>
+                    <div class="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium text-indigo-600">Compliance & Tech</div>
+                </div>
+                <div class="flex-auto border-t-2 transition duration-500 ease-in-out border-gray-300"></div>
+                
+                <div class="flex items-center relative">
+                    <div class="rounded-full transition duration-500 ease-in-out h-12 w-12 py-3 border-2 border-gray-300 bg-white text-gray-400 font-bold flex items-center justify-center">
+                        3
+                    </div>
+                    <div class="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium text-gray-500">Architecture</div>
+                </div>
+                <div class="flex-auto border-t-2 transition duration-500 ease-in-out border-gray-300"></div>
+                
+                <div class="flex items-center relative">
+                    <div class="rounded-full transition duration-500 ease-in-out h-12 w-12 py-3 border-2 border-gray-300 bg-white text-gray-400 font-bold flex items-center justify-center">
+                        4
+                    </div>
+                    <div class="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium text-gray-500">Integration</div>
+                </div>
+                <div class="flex-auto border-t-2 transition duration-500 ease-in-out border-gray-300"></div>
+                
+                <div class="flex items-center relative">
+                    <div class="rounded-full transition duration-500 ease-in-out h-12 w-12 py-3 border-2 border-gray-300 bg-white text-gray-400 font-bold flex items-center justify-center">
+                        5
+                    </div>
+                    <div class="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium text-gray-500">Review</div>
+                </div>
             </div>
-        }
+        </div>
+
+        <form method="post" asp-action="Step2" class="mt-8">
+            <!-- Compliance Section -->
+            <div class="bg-gray-50 p-6 rounded-lg mb-6 shadow-sm">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-shield-alt text-indigo-500 mr-2"></i>
+                    Compliance
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                        <div class="relative flex items-start">
+                            <div class="flex items-center h-5">
+                                <input type="checkbox" asp-for="CompliancePciSff" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+                            </div>
+                            <div class="ml-3">
+                                <label asp-for="CompliancePciSff" class="font-medium text-gray-700">PCI SFF Compliance</label>
+                                <p class="text-gray-500 text-xs mt-1">Payment Card Industry compliance</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                        <div class="relative flex items-start">
+                            <div class="flex items-center h-5">
+                                <input type="checkbox" asp-for="CountrySpecificCompliance" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+                            </div>
+                            <div class="ml-3">
+                                <label asp-for="CountrySpecificCompliance" class="font-medium text-gray-700">Country-Specific Compliance</label>
+                                <p class="text-gray-500 text-xs mt-1">Local regulatory requirements</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tech Stack Section -->
+            <div class="bg-gray-50 p-6 rounded-lg mb-6 shadow-sm">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-code text-indigo-500 mr-2"></i>
+                    Tech Stack
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Backend Type -->
+                    <div>
+                        <label asp-for="BackendType" class="block text-sm font-medium text-gray-700 mb-1">
+                            Backend Type <span class="text-red-500">*</span>
+                        </label>
+                        <div class="relative">
+                            <!-- Icon container - adjusted positioning -->
+                            <div class="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                <i class="fas fa-server text-gray-400 text-sm"></i>
+                            </div>
+                            
+                            <!-- Select with custom padding and appearance-none -->
+                            <select asp-for="BackendType" 
+                                    class="pl-10 pr-10 py-2 h-10 w-full appearance-none shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md bg-white">
+                                <option value="">Select Backend</option>
+                                @foreach (var val in Enum.GetValues(typeof(BackendType)))
+                                {
+                                    <option value="@val">@val</option>
+                                }
+                            </select>
+                            
+                            <!-- Custom dropdown arrow -->
+                            <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                <svg class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <span asp-validation-for="BackendType" class="text-red-500 text-xs mt-1"></span>
+                    </div>
+
+                    <!-- Frontend Type -->
+                    <div>
+                        <label asp-for="FrontendType" class="block text-sm font-medium text-gray-700 mb-1">
+                            Frontend Type <span class="text-red-500">*</span>
+                        </label>
+                        <div class="relative">
+                            <!-- Icon container - adjusted positioning -->
+                            <div class="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                <i class="fas fa-desktop text-gray-400 text-sm"></i>
+                            </div>
+                            
+                            <!-- Select with custom padding and appearance-none -->
+                            <select asp-for="FrontendType" 
+                                    class="pl-10 pr-10 py-2 h-10 w-full appearance-none shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md bg-white">
+                                <option value="">Select Frontend</option>
+                                @foreach (var val in Enum.GetValues(typeof(FrontendType)))
+                                {
+                                    <option value="@val">@val</option>
+                                }
+                            </select>
+                            
+                            <!-- Custom dropdown arrow -->
+                            <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                <svg class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <span asp-validation-for="FrontendType" class="text-red-500 text-xs mt-1"></span>
+                    </div>
+
+                    <!-- Mobile Type -->
+                    <div>
+                        <label asp-for="MobileType" class="block text-sm font-medium text-gray-700 mb-1">
+                            Mobile Type
+                        </label>
+                        <div class="relative">
+                            <!-- Icon container - adjusted positioning -->
+                            <div class="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                <i class="fas fa-mobile-alt text-gray-400 text-sm"></i>
+                            </div>
+                            
+                            <!-- Select with custom padding and appearance-none -->
+                            <select asp-for="MobileType" 
+                                    class="pl-10 pr-10 py-2 h-10 w-full appearance-none shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md bg-white">
+                                <option value="">Select Mobile</option>
+                                @foreach (var val in Enum.GetValues(typeof(MobileType)))
+                                {
+                                    <option value="@val">@val</option>
+                                }
+                            </select>
+                            
+                            <!-- Custom dropdown arrow -->
+                            <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                <svg class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <span asp-validation-for="MobileType" class="text-red-500 text-xs mt-1"></span>
+                        <p class="mt-1 text-xs text-gray-500">Optional if no mobile component</p>
+                    </div>
+
+                    <!-- Database Type -->
+                    <div>
+                        <label asp-for="DatabaseType" class="block text-sm font-medium text-gray-700 mb-1">
+                            Database Type <span class="text-red-500">*</span>
+                        </label>
+                        <div class="relative">
+                            <!-- Icon container - adjusted positioning -->
+                            <div class="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                <i class="fas fa-database text-gray-400 text-sm"></i>
+                            </div>
+                            
+                            <!-- Select with custom padding and appearance-none -->
+                            <select asp-for="DatabaseType" 
+                                    class="pl-10 pr-10 py-2 h-10 w-full appearance-none shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md bg-white">
+                                <option value="">Select Database</option>
+                                @foreach (var val in Enum.GetValues(typeof(DatabaseType)))
+                                {
+                                    <option value="@val">@val</option>
+                                }
+                            </select>
+                            
+                            <!-- Custom dropdown arrow -->
+                            <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                <svg class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <span asp-validation-for="DatabaseType" class="text-red-500 text-xs mt-1"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SSO Integration Section -->
+            <div class="bg-gray-50 p-6 rounded-lg mb-6 shadow-sm">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-sign-in-alt text-indigo-500 mr-2"></i>
+                    SSO Integration
+                </h2>
+                
+                <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100 mb-4">
+                    <p class="text-sm text-gray-700 mb-4">Select all SSO providers required for this project:</p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="relative flex items-center">
+                            <input type="checkbox" asp-for="GoogleSso" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+                            <label asp-for="GoogleSso" class="ml-3 text-sm font-medium text-gray-700 flex items-center">
+                                <i class="fab fa-google text-red-500 mr-2"></i> Google
+                            </label>
+                        </div>
+                        
+                        <div class="relative flex items-center">
+                            <input type="checkbox" asp-for="AppleSso" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+                            <label asp-for="AppleSso" class="ml-3 text-sm font-medium text-gray-700 flex items-center">
+                                <i class="fab fa-apple text-gray-800 mr-2"></i> Apple
+                            </label>
+                        </div>
+                        
+                        <div class="relative flex items-center">
+                            <input type="checkbox" asp-for="FacebookSso" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+                            <label asp-for="FacebookSso" class="ml-3 text-sm font-medium text-gray-700 flex items-center">
+                                <i class="fab fa-facebook text-blue-600 mr-2"></i> Facebook
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <label asp-for="IamVendor" class="block text-sm font-medium text-gray-700 mb-1">
+                        IAM Vendor
+                    </label>
+                    <div class="relative">
+                        <!-- Icon container - adjusted positioning -->
+                        <div class="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                            <i class="fas fa-id-badge text-gray-400 text-sm"></i>
+                        </div>
+                        
+                        <!-- Select with custom padding and appearance-none -->
+                        <select asp-for="IamVendor" 
+                                class="pl-10 pr-10 py-2 h-10 w-full appearance-none shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md bg-white">
+                            <option value="">Select IAM Vendor</option>
+                            @foreach (var val in Enum.GetValues(typeof(IamVendorType)))
+                            {
+                                <option value="@val">@val</option>
+                            }
+                        </select>
+                        
+                        <!-- Custom dropdown arrow -->
+                        <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                            <svg class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <span asp-validation-for="IamVendor" class="text-red-500 text-xs mt-1"></span>
+                    <p class="mt-1 text-xs text-gray-500">Identity & Access Management vendor</p>
+                </div>
+            </div>
+
+            <!-- Infrastructure Section -->
+            <div class="bg-gray-50 p-6 rounded-lg mb-6 shadow-sm">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-network-wired text-indigo-500 mr-2"></i>
+                    Infrastructure
+                </h2>
+                
+                <div>
+                    <label asp-for="InfraProvider" class="block text-sm font-medium text-gray-700 mb-1">
+                        Infrastructure Provider <span class="text-red-500">*</span>
+                    </label>
+                    <div class="relative">
+                        <!-- Icon container - adjusted positioning -->
+                        <div class="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                            <i class="fas fa-cloud text-gray-400 text-sm"></i>
+                        </div>
+                        
+                        <!-- Select with custom padding and appearance-none -->
+                        <select asp-for="InfraProvider" 
+                                class="pl-10 pr-10 py-2 h-10 w-full appearance-none shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md bg-white">
+                            <option value="">Select Infra Provider</option>
+                            @foreach (var val in Enum.GetValues(typeof(InfraType)))
+                            {
+                                <option value="@val">@val</option>
+                            }
+                        </select>
+                        
+                        <!-- Custom dropdown arrow -->
+                        <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                            <svg class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <span asp-validation-for="InfraProvider" class="text-red-500 text-xs mt-1"></span>
+                    <p class="mt-1 text-xs text-gray-500">Cloud or on-premises infrastructure</p>
+                </div>
+            </div>
+
+            <div class="mt-8 flex items-center justify-between">
+                <a asp-action="Step1" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    Previous
+                </a>
+                <div>
+                    <span class="text-sm text-gray-500 mr-4">Step 2 of 5</span>
+                    <button type="submit" class="inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-150">
+                        Continue
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
     </div>
-
-    <h2 class="text-2xl font-bold mb-6">Compliance, Tech Stack, SSO & Infra</h2>
-
-    <form method="post" asp-action="Step2">
-        <div class="space-y-6">
-
-            <!-- Compliance -->
-            <fieldset>
-                <legend class="text-lg font-semibold mb-2">Compliance</legend>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <label><input type="checkbox" asp-for="CompliancePciSff" class="mr-2" /> PCI SFF Compliance</label>
-                    <label><input type="checkbox" asp-for="CountrySpecificCompliance" class="mr-2" /> Country-Specific Compliance</label>
-                </div>
-            </fieldset>
-
-            <!-- Tech Stack -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div>
-                    <label asp-for="BackendType" class="block text-sm font-medium">Backend Type</label>
-                    <select asp-for="BackendType" class="w-full mt-1 rounded-md border-gray-300 shadow-sm">
-                        <option value="">Select Backend</option>
-                        @foreach (var val in Enum.GetValues(typeof(BackendType)))
-                        {
-                            <option value="@val">@val</option>
-                        }
-                    </select>
-                </div>
-
-                <div>
-                    <label asp-for="FrontendType" class="block text-sm font-medium">Frontend Type</label>
-                    <select asp-for="FrontendType" class="w-full mt-1 rounded-md border-gray-300 shadow-sm">
-                        <option value="">Select Frontend</option>
-                        @foreach (var val in Enum.GetValues(typeof(FrontendType)))
-                        {
-                            <option value="@val">@val</option>
-                        }
-                    </select>
-                </div>
-
-                <div>
-                    <label asp-for="MobileType" class="block text-sm font-medium">Mobile Type</label>
-                    <select asp-for="MobileType" class="w-full mt-1 rounded-md border-gray-300 shadow-sm">
-                        <option value="">Select Mobile</option>
-                        @foreach (var val in Enum.GetValues(typeof(MobileType)))
-                        {
-                            <option value="@val">@val</option>
-                        }
-                    </select>
-                </div>
-
-                <div>
-                    <label asp-for="DatabaseType" class="block text-sm font-medium">Database Type</label>
-                    <select asp-for="DatabaseType" class="w-full mt-1 rounded-md border-gray-300 shadow-sm">
-                        <option value="">Select Database</option>
-                        @foreach (var val in Enum.GetValues(typeof(DatabaseType)))
-                        {
-                            <option value="@val">@val</option>
-                        }
-                    </select>
-                </div>
-            </div>
-
-            <!-- SSO -->
-            <fieldset>
-                <legend class="text-lg font-semibold mb-2">SSO Integration</legend>
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <label><input type="checkbox" asp-for="GoogleSso" class="mr-2" /> Google</label>
-                    <label><input type="checkbox" asp-for="AppleSso" class="mr-2" /> Apple</label>
-                    <label><input type="checkbox" asp-for="FacebookSso" class="mr-2" /> Facebook</label>
-                </div>
-
-                <div class="mt-4">
-                    <label asp-for="IamVendor" class="block text-sm font-medium">IAM Vendor</label>
-                    <select asp-for="IamVendor" class="w-full mt-1 rounded-md border-gray-300 shadow-sm">
-                        <option value="">Select Vendor</option>
-                        @foreach (var val in Enum.GetValues(typeof(IamVendorType)))
-                        {
-                            <option value="@val">@val</option>
-                        }
-                    </select>
-                </div>
-            </fieldset>
-
-            <!-- Infra -->
-            <div class="mt-6">
-                <label asp-for="InfraProvider" class="block text-sm font-medium">Infrastructure Provider</label>
-                <select asp-for="InfraProvider" class="w-full mt-1 rounded-md border-gray-300 shadow-sm">
-                    <option value="">Select Infra</option>
-                    @foreach (var val in Enum.GetValues(typeof(InfraType)))
-                    {
-                        <option value="@val">@val</option>
-                    }
-                </select>
-            </div>
-        </div>
-
-        <div class="mt-8 flex justify-between">
-            <a asp-action="Step1" class="text-gray-600 hover:underline">← Back</a>
-            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">Next</button>
-        </div>
-    </form>
 </div>
 
 @section Scripts {

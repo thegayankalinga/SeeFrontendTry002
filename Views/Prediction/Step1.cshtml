@@ -2,77 +2,250 @@
 @using SeeFrontendTry002.Models.Enumz
 
 @{
-    ViewData["Title"] = "Step 1 - Project & Environments";
+    ViewData["Title"] = "Project Information";
 }
 
-<div class="max-w-4xl mx-auto p-8 mt-10 bg-white rounded-xl shadow-lg">
-    <!-- Stepper UI -->
-    <div class="flex justify-between mb-6">
-        @for (int i = 1; i <= 5; i++)
-        {
-            <div class="text-center w-1/5">
-                <div class="h-10 w-10 mx-auto rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">@i</div>
-                <div class="mt-2 text-sm text-gray-600">
-                    @($"Step {i}")
+<div class="bg-white rounded-xl shadow-md overflow-hidden">
+    <div class="p-6">
+        <div class="mb-6">
+            <h1 class="text-2xl font-bold text-gray-900">New Project</h1>
+            <p class="text-sm text-gray-500 mt-1">Step 1: Project Information & Environment Setup</p>
+        </div>
+
+        <!-- Progress steps -->
+        <div class="mb-8">
+            <div class="flex items-center w-full">
+                <div class="flex items-center relative">
+                    <div class="rounded-full transition duration-500 ease-in-out h-12 w-12 py-3 border-2 bg-indigo-600 border-indigo-600 text-white font-bold flex items-center justify-center">
+                        1
+                    </div>
+                    <div class="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium text-indigo-600">Project Info</div>
+                </div>
+                <div class="flex-auto border-t-2 transition duration-500 ease-in-out border-gray-300"></div>
+                
+                <div class="flex items-center relative">
+                    <div class="rounded-full transition duration-500 ease-in-out h-12 w-12 py-3 border-2 border-gray-300 bg-white text-gray-400 font-bold flex items-center justify-center">
+                        2
+                    </div>
+                    <div class="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium text-gray-500">Compliance & Tech</div>
+                </div>
+                <div class="flex-auto border-t-2 transition duration-500 ease-in-out border-gray-300"></div>
+                
+                <div class="flex items-center relative">
+                    <div class="rounded-full transition duration-500 ease-in-out h-12 w-12 py-3 border-2 border-gray-300 bg-white text-gray-400 font-bold flex items-center justify-center">
+                        3
+                    </div>
+                    <div class="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium text-gray-500">Architecture</div>
+                </div>
+                <div class="flex-auto border-t-2 transition duration-500 ease-in-out border-gray-300"></div>
+                
+                <div class="flex items-center relative">
+                    <div class="rounded-full transition duration-500 ease-in-out h-12 w-12 py-3 border-2 border-gray-300 bg-white text-gray-400 font-bold flex items-center justify-center">
+                        4
+                    </div>
+                    <div class="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium text-gray-500">Integration</div>
+                </div>
+                <div class="flex-auto border-t-2 transition duration-500 ease-in-out border-gray-300"></div>
+                
+                <div class="flex items-center relative">
+                    <div class="rounded-full transition duration-500 ease-in-out h-12 w-12 py-3 border-2 border-gray-300 bg-white text-gray-400 font-bold flex items-center justify-center">
+                        5
+                    </div>
+                    <div class="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium text-gray-500">Review</div>
                 </div>
             </div>
-        }
+        </div>
+
+        <form method="post" asp-action="Step1" class="mt-8">
+            <div class="bg-gray-50 p-6 rounded-lg mb-6 shadow-sm">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-info-circle text-indigo-500 mr-2"></i>
+                    Basic Project Information
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Project Name -->
+                    <div>
+                        <label asp-for="ProjectName" class="block text-sm font-medium text-gray-700 mb-1">
+                            Project Name <span class="text-red-500">*</span>
+                        </label>
+                        <div class="relative">
+                            <!-- Icon container - adjusted positioning -->
+                            <div class="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                <i class="fas fa-project-diagram text-gray-400 text-sm"></i>
+                            </div>
+                            <!-- Input with custom padding -->
+                            <input asp-for="ProjectName" 
+                                   class="pl-10 pr-4 py-2 h-10 w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" 
+                                   placeholder="Enter project name" required />
+                        </div>
+                        <span asp-validation-for="ProjectName" class="text-red-500 text-xs mt-1"></span>
+                        <p class="mt-1 text-xs text-gray-500">Choose a descriptive name for your project</p>
+                    </div>
+
+                    <!-- Region -->
+                    <div>
+                        <label asp-for="Region" class="block text-sm font-medium text-gray-700 mb-1">
+                            Region <span class="text-red-500">*</span>
+                        </label>
+                        <div class="relative">
+                            <!-- Icon container - adjusted positioning -->
+                            <div class="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                <i class="fas fa-globe-americas text-gray-400 text-sm"></i>
+                            </div>
+                            
+                            <!-- Select with custom padding and appearance-none -->
+                            <select asp-for="Region" 
+                                    class="pl-10 pr-10 py-2 h-10 w-full appearance-none shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md bg-white">
+                                <option value="">-- Select Region --</option>
+                                @foreach (var val in Enum.GetValues(typeof(Region)))
+                                {
+                                    <option value="@val">@val</option>
+                                }
+                            </select>
+                            
+                            <!-- Custom dropdown arrow -->
+                            <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                <svg class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <span asp-validation-for="Region" class="text-red-500 text-xs mt-1"></span>
+                    </div>
+
+                    <!-- Prediction Model -->
+                    <div>
+                        <label asp-for="PredictionModelName" class="block text-sm font-medium text-gray-700 mb-1">
+                            Prediction Model <span class="text-red-500">*</span>
+                        </label>
+                        <div class="relative">
+                            <!-- Icon container - adjusted positioning -->
+                            <div class="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                <i class="fas fa-brain text-gray-400 text-sm"></i>
+                            </div>
+                            
+                            <!-- Select with custom padding and appearance-none -->
+                            <select asp-for="PredictionModelName" 
+                                    class="pl-10 pr-10 py-2 h-10 w-full appearance-none shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md bg-white">
+                                <option value="">-- Select Model --</option>
+                                @foreach (var val in Enum.GetValues(typeof(PredictionModel)))
+                                {
+                                    <option value="@val">@val</option>
+                                }
+                            </select>
+                            
+                            <!-- Custom dropdown arrow -->
+                            <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                <svg class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <span asp-validation-for="PredictionModelName" class="text-red-500 text-xs mt-1"></span>
+                        <p class="mt-1 text-xs text-gray-500">Choose the AI model for effort estimation</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 p-6 rounded-lg mb-6 shadow-sm">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-server text-indigo-500 mr-2"></i>
+                    Environment Configuration
+                </h2>
+                
+                <div class="mb-4">
+                    <p class="text-sm text-gray-500 mb-2">Select all environments that will be needed for this project</p>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="relative flex items-start">
+                            <div class="flex items-center h-5">
+                                <input type="checkbox" asp-for="DevEnvironment" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" checked/>
+                            </div>
+                            <div class="ml-3 text-sm">
+                                <label asp-for="DevEnvironment" class="font-medium text-gray-700">Development</label>
+                                <p class="text-gray-500 text-xs">Dev environment</p>
+                            </div>
+                        </div>
+                        
+                        <div class="relative flex items-start">
+                            <div class="flex items-center h-5">
+                                <input type="checkbox" asp-for="SitEnvironment" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+                            </div>
+                            <div class="ml-3 text-sm">
+                                <label asp-for="SitEnvironment" class="font-medium text-gray-700">SIT</label>
+                                <p class="text-gray-500 text-xs">System Integration Testing</p>
+                            </div>
+                        </div>
+                        
+                        <div class="relative flex items-start">
+                            <div class="flex items-center h-5">
+                                <input type="checkbox" asp-for="UatEnvironment" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" checked/>
+                            </div>
+                            <div class="ml-3 text-sm">
+                                <label asp-for="UatEnvironment" class="font-medium text-gray-700">UAT</label>
+                                <p class="text-gray-500 text-xs">User Acceptance Testing</p>
+                            </div>
+                        </div>
+                        
+                        <div class="relative flex items-start">
+                            <div class="flex items-center h-5">
+                                <input type="checkbox" asp-for="StagingEnvironment" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+                            </div>
+                            <div class="ml-3 text-sm">
+                                <label asp-for="StagingEnvironment" class="font-medium text-gray-700">Staging</label>
+                                <p class="text-gray-500 text-xs">Pre-production</p>
+                            </div>
+                        </div>
+                        
+                        <div class="relative flex items-start">
+                            <div class="flex items-center h-5">
+                                <input type="checkbox" asp-for="TrainingEnvironment" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+                            </div>
+                            <div class="ml-3 text-sm">
+                                <label asp-for="TrainingEnvironment" class="font-medium text-gray-700">Training</label>
+                                <p class="text-gray-500 text-xs">Training environment</p>
+                            </div>
+                        </div>
+                        
+                        <div class="relative flex items-start">
+                            <div class="flex items-center h-5">
+                                <input type="checkbox" asp-for="ProductionEnvironment" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" checked/>
+                            </div>
+                            <div class="ml-3 text-sm">
+                                <label asp-for="ProductionEnvironment" class="font-medium text-gray-700">Production</label>
+                                <p class="text-gray-500 text-xs">Live environment</p>
+                            </div>
+                        </div>
+                        
+                        <div class="relative flex items-start">
+                            <div class="flex items-center h-5">
+                                <input type="checkbox" asp-for="DrEnvironment" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+                            </div>
+                            <div class="ml-3 text-sm">
+                                <label asp-for="DrEnvironment" class="font-medium text-gray-700">DR</label>
+                                <p class="text-gray-500 text-xs">Disaster Recovery</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 flex items-center justify-between">
+                <a href="/" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    Cancel
+                </a>
+                <div>
+                    <span class="text-sm text-gray-500 mr-4">Step 1 of 5</span>
+                    <button type="submit" class="inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-150">
+                        Continue
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
     </div>
-
-    <h2 class="text-2xl font-bold mb-6">Project Info & Environment</h2>
-
-    <form method="post" asp-action="Step1">
-        <div class="space-y-6">
-            <div>
-                <label asp-for="ProjectName" class="block text-sm font-medium">Project Name</label>
-                <input asp-for="ProjectName" class="mt-1 w-full border-gray-300 rounded-md shadow-sm" />
-                <span asp-validation-for="ProjectName" class="text-red-500 text-sm"></span>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div>
-                    <label asp-for="Region" class="block text-sm font-medium">Region</label>
-                    <select asp-for="Region" class="mt-1 w-full border-gray-300 rounded-md shadow-sm">
-                        <option value="">-- Select --</option>
-                        @foreach (var val in Enum.GetValues(typeof(Region)))
-                        {
-                            <option value="@val">@val</option>
-                        }
-                    </select>
-                    <span asp-validation-for="Region" class="text-red-500 text-sm"></span>
-                </div>
-
-                <div>
-                    <label asp-for="PredictionModelName" class="block text-sm font-medium">Prediction Model</label>
-                    <select asp-for="PredictionModelName" class="mt-1 w-full border-gray-300 rounded-md shadow-sm">
-                        <option value="">-- Select --</option>
-                        @foreach (var val in Enum.GetValues(typeof(PredictionModel)))
-                        {
-                            <option value="@val">@val</option>
-                        }
-                    </select>
-                    <span asp-validation-for="PredictionModelName" class="text-red-500 text-sm"></span>
-                </div>
-            </div>
-
-            <fieldset>
-                <legend class="text-lg font-semibold mb-2">Environments</legend>
-                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                    <label><input type="checkbox" asp-for="DevEnvironment" class="mr-2" /> Dev</label>
-                    <label><input type="checkbox" asp-for="SitEnvironment" class="mr-2" /> SIT</label>
-                    <label><input type="checkbox" asp-for="UatEnvironment" class="mr-2" /> UAT</label>
-                    <label><input type="checkbox" asp-for="StagingEnvironment" class="mr-2" /> Staging</label>
-                    <label><input type="checkbox" asp-for="TrainingEnvironment" class="mr-2" /> Training</label>
-                    <label><input type="checkbox" asp-for="ProductionEnvironment" class="mr-2" /> Production</label>
-                    <label><input type="checkbox" asp-for="DrEnvironment" class="mr-2" /> DR</label>
-                </div>
-            </fieldset>
-        </div>
-
-        <div class="mt-8 flex justify-end">
-            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">Next</button>
-        </div>
-    </form>
 </div>
 
 @section Scripts {
