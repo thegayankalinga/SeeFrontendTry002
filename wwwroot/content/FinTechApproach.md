@@ -155,4 +155,4 @@ As financial services continue their digital transformation journey, accurate ef
 
 ---
 
-*This article is based on research conducted as part of the MSc in Advanced Software Engineering at the University of Westminster in collaboration with Informatics Institute of Technology.*
+*This article is based on research conducted as part of the Advanced Software Engineering.*
