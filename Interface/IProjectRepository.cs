@@ -14,4 +14,6 @@ public interface IProjectRepository
         PredictionApiResponseDto dto);
 
     Task<bool> UpdateCalculationStatusAsync(int projectId, CalculationStatusType status);
+
+    Task<List<PredictionResultResponseDto>> GetPredictedResulstsByProjectIdAsync(int projectId);
 }

@@ -1,0 +1,250 @@
+@model SeeFrontendTry002.ViewModels.PredictionInputViewModel
+
+@{
+    ViewData["Title"] = "Project Details";
+}
+
+<div class="bg-white rounded-xl shadow-md overflow-hidden">
+    <div class="p-6 space-y-4">
+        <h1 class="text-2xl font-bold text-gray-900">Project Details</h1>
+        <p class="text-sm text-gray-500">View complete effort estimation input</p>
+
+        <!-- Project Info Section -->
+        <div class="bg-gray-50 p-6 rounded-lg mb-6 shadow-sm">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                <i class="fas fa-info-circle text-indigo-500 mr-2"></i>
+                Project Information
+                @* <a asp-action="Step1" class="ml-auto text-sm text-indigo-600 hover:text-indigo-800"> *@
+                @*     <i class="fas fa-edit"></i> Edit *@
+                @* </a> *@
+            </h2>
+
+            <div class="bg-white p-4 rounded-lg border border-gray-200">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <p class="text-sm text-gray-500">Project Name</p>
+                        <p class="font-medium">@Model.ProjectName</p>
+                    </div>
+
+                    <div>
+                        <p class="text-sm text-gray-500">Region</p>
+                        <p class="font-medium">@Model.Region</p>
+                    </div>
+
+                    <div>
+                        <p class="text-sm text-gray-500">Prediction Status</p>
+                        <p class="font-medium">@Model.CalculationStatusType</p>
+                    </div>
+
+                    <div>
+                        <p class="text-sm text-gray-500">Prediction Model</p>
+                        <p class="font-medium">@Model.PredictionModelName</p>
+                    </div>
+                </div>
+
+                <div class="mt-4 pt-4 border-t border-gray-100">
+                    <p class="text-sm text-gray-500 mb-2">Environments</p>
+                    <div class="flex flex-wrap gap-2">
+                        @if (Model.DevEnvironment) { <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Development</span> }
+                        @if (Model.SitEnvironment) { <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">SIT</span> }
+                        @if (Model.UatEnvironment) { <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">UAT</span> }
+                        @if (Model.StagingEnvironment) { <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Staging</span> }
+                        @if (Model.TrainingEnvironment) { <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Training</span> }
+                        @if (Model.ProductionEnvironment) { <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Production</span> }
+                        @if (Model.DrEnvironment) { <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">DR</span> }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Compliance & Tech Section -->
+        <div class="bg-gray-50 p-6 rounded-lg mb-6 shadow-sm">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                <i class="fas fa-shield-alt text-indigo-500 mr-2"></i>
+                Compliance & Technology
+                @* <a asp-action="Step2" class="ml-auto text-sm text-indigo-600 hover:text-indigo-800"> *@
+                @*     <i class="fas fa-edit"></i> Edit *@
+                @* </a> *@
+            </h2>
+
+            <div class="bg-white p-4 rounded-lg border border-gray-200">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <p class="text-sm text-gray-500">Tech Stack</p>
+                        <div class="mt-1">
+                            <p class="text-xs font-medium flex items-center">
+                                <i class="fas fa-server text-gray-400 mr-2"></i> Backend: <span class="ml-1">@Model.BackendType</span>
+                            </p>
+                            <p class="text-xs font-medium flex items-center mt-1">
+                                <i class="fas fa-desktop text-gray-400 mr-2"></i> Frontend: <span class="ml-1">@Model.FrontendType</span>
+                            </p>
+                            <p class="text-xs font-medium flex items-center mt-1">
+                                <i class="fas fa-mobile-alt text-gray-400 mr-2"></i> Mobile: <span class="ml-1">@(string.IsNullOrEmpty(Model.MobileType.ToString()) ? "N/A" : Model.MobileType)</span>
+                            </p>
+                            <p class="text-xs font-medium flex items-center mt-1">
+                                <i class="fas fa-database text-gray-400 mr-2"></i> Database: <span class="ml-1">@Model.DatabaseType</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="text-sm text-gray-500">Compliance</p>
+                        <div class="mt-1 space-y-1">
+                            <p class="text-xs flex items-center">
+                                <i class="@(Model.CompliancePciSff ? "fas fa-check-circle text-green-500" : "fas fa-times-circle text-gray-400") mr-2"></i>
+                                PCI SFF Compliance
+                            </p>
+                            <p class="text-xs flex items-center">
+                                <i class="@(Model.CountrySpecificCompliance ? "fas fa-check-circle text-green-500" : "fas fa-times-circle text-gray-400") mr-2"></i>
+                                Country-Specific Compliance
+                            </p>
+                        </div>
+
+                        <p class="text-sm text-gray-500 mt-3">Infrastructure</p>
+                        <p class="font-medium">@Model.InfraProvider</p>
+                    </div>
+                </div>
+
+                <div class="mt-4 pt-4 border-t border-gray-100">
+                    <p class="text-sm text-gray-500 mb-2">SSO Integration</p>
+                    <div class="flex flex-wrap gap-2">
+                        @if (Model.GoogleSso) { <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full"><i class="fab fa-google mr-1"></i>Google</span> }
+                        @if (Model.AppleSso) { <span class="px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded-full"><i class="fab fa-apple mr-1"></i>Apple</span> }
+                        @if (Model.FacebookSso) { <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full"><i class="fab fa-facebook mr-1"></i>Facebook</span> }
+                    </div>
+
+                    @if (!string.IsNullOrEmpty(Model.IamVendor.ToString()))
+                    {
+                        <p class="text-sm text-gray-500 mt-3">IAM Vendor</p>
+                        <p class="font-medium">@Model.IamVendor</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Architecture & Complexity Section -->
+        <div class="bg-gray-50 p-6 rounded-lg mb-6 shadow-sm">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                <i class="fas fa-chart-line text-indigo-500 mr-2"></i>
+                Architecture & Complexity
+                @* <a asp-action="Step3" class="ml-auto text-sm text-indigo-600 hover:text-indigo-800"> *@
+                @*     <i class="fas fa-edit"></i> Edit *@
+                @* </a> *@
+            </h2>
+
+            <div class="bg-white p-4 rounded-lg border border-gray-200">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <p class="text-sm text-gray-500">Complexity Ratings</p>
+                        <div class="mt-1">
+                            <p class="text-xs font-medium flex items-center mt-1">
+                                <i class="fas fa-project-diagram text-gray-400 mr-2"></i> Dependency Complexity: <span class="ml-1">@Model.DependencyComplexity</span>
+                            </p>
+                            <p class="text-xs font-medium flex items-center mt-1">
+                                <i class="fas fa-tachometer-alt text-gray-400 mr-2"></i> Decision Speed: <span class="ml-1">@Model.DecisionSpeed</span>
+                            </p>
+                            <p class="text-xs font-medium flex items-center mt-1">
+                                <i class="fas fa-user-graduate text-gray-400 mr-2"></i> Client Technical Knowledge: <span class="ml-1">@Model.ClientTechnicalKnowledge</span>
+                            </p>
+                            <p class="text-xs font-medium flex items-center mt-1">
+                                <i class="fas fa-mobile-alt text-gray-400 mr-2"></i> Device Test Coverage: <span class="ml-1">@Model.DeviceTestCoverage</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="text-sm text-gray-500">Localization</p>
+                        <div class="mt-1">
+                            <p class="text-xs font-medium flex items-center mt-1">
+                                <i class="fas fa-language text-gray-400 mr-2"></i> Languages: <span class="ml-1">@Model.NoOfLanguages</span>
+                            </p>
+                            <p class="text-xs font-medium flex items-center mt-1">
+                                <i class="fas fa-text-width text-gray-400 mr-2"></i> RTL Languages: <span class="ml-1">@Model.NoOfRtlLanguages</span>
+                            </p>
+                        </div>
+
+                        <p class="text-sm text-gray-500 mt-3">Regression Type</p>
+                        <p class="font-medium">@Model.Regression</p>
+                    </div>
+                </div>
+
+                <div class="mt-4 pt-4 border-t border-gray-100">
+                    <p class="text-sm text-gray-500 mb-2">Features & Integrations</p>
+                    <div class="flex flex-wrap gap-2">
+                        @if (Model.TestAutomation) { <span class="px-2 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full">Test Automation</span> }
+                        @if (Model.MiddlewareAvailability) { <span class="px-2 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full">Middleware</span> }
+                        @if (Model.PaymentProviderIntegration) { <span class="px-2 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full">Payment Provider</span> }
+                        @if (Model.FidoIntegration) { <span class="px-2 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full">FIDO Integration</span> }
+                        @if (Model.DataMigration) { <span class="px-2 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full">Data Migration</span> }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance & Integration Section -->
+        <div class="bg-gray-50 p-6 rounded-lg mb-6 shadow-sm">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                <i class="fas fa-cogs text-indigo-500 mr-2"></i>
+                Performance & Integration
+                @* <a asp-action="Step4" class="ml-auto text-sm text-indigo-600 hover:text-indigo-800"> *@
+                @*     <i class="fas fa-edit"></i> Edit *@
+                @* </a> *@
+            </h2>
+
+            <div class="bg-white p-4 rounded-lg border border-gray-200">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <p class="text-sm text-gray-500">Performance Metrics</p>
+                        <div class="mt-1">
+                            <p class="text-xs font-medium flex items-center mt-1">
+                                <i class="fas fa-tachometer-alt text-gray-400 mr-2"></i> TPS Required: <span class="ml-1">@Model.TpsRequired</span>
+                            </p>
+                            <p class="text-xs font-medium flex items-center mt-1">
+                                <i class="fas fa-calendar-alt text-gray-400 mr-2"></i> Warranty Period: <span class="ml-1">@Model.WarrantyMonths months</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="text-sm text-gray-500">Modules</p>
+                        <div class="mt-1">
+                            <p class="text-xs font-medium flex items-center mt-1">
+                                <i class="fas fa-cube text-gray-400 mr-2"></i> Functional Modules: <span class="ml-1">@Model.NoOfFunctionalModules</span>
+                            </p>
+                            <p class="text-xs font-medium flex items-center mt-1">
+                                <i class="fas fa-cubes text-gray-400 mr-2"></i> Non-Functional Modules: <span class="ml-1">@Model.NoOfNoneFunctionalModules</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4 pt-4 border-t border-gray-100">
+                    <p class="text-sm text-gray-500 mb-2">Integration Points</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                        <div class="bg-gray-50 p-2 rounded">
+                            <p class="text-xs text-gray-500">REST</p>
+                            <p class="text-lg font-semibold">@Model.RestIntegrationPoints</p>
+                        </div>
+                        <div class="bg-gray-50 p-2 rounded">
+                            <p class="text-xs text-gray-500">SOAP</p>
+                            <p class="text-lg font-semibold">@Model.SoapIntegrationPoints</p>
+                        </div>
+                        <div class="bg-gray-50 p-2 rounded">
+                            <p class="text-xs text-gray-500">ISO8583</p>
+                            <p class="text-lg font-semibold">@Model.Iso8583IntegrationPoints</p>
+                        </div>
+                        <div class="bg-gray-50 p-2 rounded">
+                            <p class="text-xs text-gray-500">SDK</p>
+                            <p class="text-lg font-semibold">@Model.SdkIntegrationPoints</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="mt-6">
+            <a asp-action="Index" class="text-blue-600 hover:underline">← Back to List</a>
+        </div>
+    </div>
+</div>

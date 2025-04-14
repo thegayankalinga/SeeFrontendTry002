@@ -220,4 +220,81 @@ public static class ProjectMapper
             }
         };
     }
+    
+    //Response detail DTO to View Model
+
+    public static PredictionInputViewModel ToViewModel(PredictionResponseDetailsDto response)
+    {
+        var featureData = response.FeatureData;
+        return new PredictionInputViewModel
+        {
+            ProjectName = response.ProjectName,
+            Region = response.Region,
+            CalculationStatusType = response.CalculationStatus,
+            DevEnvironment = featureData.DevEnvironment,
+            SitEnvironment = featureData.SitEnvironment,
+            UatEnvironment = featureData.UatEnvironment,
+            StagingEnvironment = featureData.StagingEnvironment,
+            TrainingEnvironment = featureData.TrainingEnvironment,
+            ProductionEnvironment = featureData.ProductionEnvironment,
+            DrEnvironment = featureData.DrEnvironment,
+            
+            CompliancePciSff = featureData.CompliancePciSff,
+            CountrySpecificCompliance = featureData.CountrySpecificCompliance,
+            
+            BackendType = featureData.BackendType,
+            FrontendType = featureData.FrontendType,
+            MobileType = featureData.MobileType,
+            DatabaseType = featureData.DatabaseType,
+            
+            GoogleSso = featureData.GoogleSso,
+            AppleSso = featureData.AppleSso,
+            FacebookSso = featureData.FacebookSso,
+            IamVendor = featureData.IamVendor,
+            
+            InfraProvider = featureData.InfraProvider,
+            
+            DependencyComplexity = featureData.DependencyComplexity,
+            DecisionSpeed = featureData.DecisionSpeed,
+            ClientTechnicalKnowledge = featureData.ClientTechnicalKnowledge,
+            DeviceTestCoverage = featureData.DeviceTestCoverage,
+            TestAutomation = featureData.TestAutomation,
+            Regression = featureData.Regression,
+            MiddlewareAvailability = featureData.MiddlewareAvailability,
+            PaymentProviderIntegration = featureData.PaymentProviderIntegration,
+            FidoIntegration = featureData.FidoIntegration,
+            DataMigration = featureData.DataMigration,
+            
+            NoOfLanguages = featureData.NoOfLanguages,
+            NoOfRtlLanguages = featureData.NoOfRtlLanguages,   
+            TpsRequired = featureData.TpsRequired, 
+            WarrantyMonths = featureData.WarrantyMonths,
+            NoOfFunctionalModules = featureData.NoOfFunctionalModules,
+            NoOfNoneFunctionalModules = featureData.NoOfNoneFunctionalModules,
+            
+            NoOfUatCycles = featureData.NoOfUatCycles,
+            CodeTestCoverage = featureData.CodeTestCoverage,
+            RestIntegrationPoints = featureData.RestIntegrationPoints,
+            SoapIntegrationPoints = featureData.SoapIntegrationPoints,
+            Iso8583IntegrationPoints = featureData.Iso8583IntegrationPoints,
+            SdkIntegrationPoints = featureData.SdkIntegrationPoints,
+            
+        };
+    }
+    
+    //Result Model Mapping to ResultReponseDto
+    public static PredictionResultResponseDto ResultModelToResultResponseDto(PredictionResult modelResult)
+    {
+        return new PredictionResultResponseDto
+        {
+            ResultId = modelResult.ResultId,
+            DeliveryEffort = modelResult.DeliveryEffort,
+            EngineeringEffort = modelResult.EngineeringEffort,
+            DevOpsEffort = modelResult.DevOpsEffort,
+            QaEffort = modelResult.QaEffort,
+            PredictionModel = modelResult.ModelName,
+            CreatedAt = modelResult.CreatedAt,
+            
+        };
+    }
 }

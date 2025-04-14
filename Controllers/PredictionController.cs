@@ -38,6 +38,56 @@ public class PredictionController : Controller
     }
 
     [HttpPost]
+    public async Task<IActionResult> PredictExisting(int projectId, PredictionModel predictionModel)
+    {
+        var project = await _projectRepository.GetProjectWithFeatureByIdAsync(projectId);
+        if (project == null)
+        {
+            _logger.LogWarning("Project {projectId} does not exist to predict", projectId);
+            return RedirectToAction("Error", "Home");
+        }
+        
+        var apiRequestDto = PredictionApiRequestMapper.ResponseDetailsToApiRequest(project, predictionModel);
+        
+        var apiPredictionResultDto = await _predictionService.PredictAsync(apiRequestDto);
+
+        bool updateResult = false;
+        if (apiPredictionResultDto is null)
+        {   
+            updateResult =
+                await _projectRepository.UpdateCalculationStatusAsync(project.ProjectId, CalculationStatusType.Failed);
+            _logger.LogError($"Project {project.ProjectName} Was null.");
+            return RedirectToAction("Error", "Home");
+        }
+        _logger.LogInformation("Prediction results - Delivery: {Delivery}, Engineering: {Engineering}, DevOps: {DevOps}, QA: {QA}",
+            apiPredictionResultDto.Predictions.DeliveryEffort,
+            apiPredictionResultDto.Predictions.EngineeringEffort,
+            apiPredictionResultDto.Predictions.DevOpsEffort,
+            apiPredictionResultDto.Predictions.QaEffort);
+        
+        updateResult =
+            await _projectRepository.UpdateCalculationStatusAsync(project.ProjectId, CalculationStatusType.Success);
+
+        if (!updateResult)
+        {
+            _logger.LogError($"Project {project.ProjectName} could not be updated with the status.");
+            return RedirectToAction("Error", "Home");
+        }
+        
+        var result = await _projectRepository.GetPredictedResulstsByProjectIdAsync(projectId);
+        var vm = new ResultViewModel
+        {
+            ProjectId = projectId,
+            FeaturesetId = project.FeatureData.FeatureSetId,
+            PredictionInputViewModel = ProjectMapper.ToViewModel(project),
+            ProjectName = project.ProjectName,
+            Results = result,
+            Success = true
+        };
+        return View("Results", vm);
+    }
+
+    [HttpPost]
     public async Task<IActionResult> Predict(PredictionInputViewModel predictionInputViewModel)
     {
         #region GetTheUserID
@@ -111,6 +161,58 @@ public class PredictionController : Controller
 
     }
 
+    public async Task<IActionResult> Detail(int id)
+    {
+        var project = await _projectRepository.GetProjectWithFeatureByIdAsync(id);
+        if (project is null)
+        {
+            _logger.LogError($"Project {id} could not be found.");
+            return RedirectToAction("Error", "Home");
+        }
+
+        var viewModel = ProjectMapper.ToViewModel(project);
+        return View(viewModel);
+    }
+
+    public async Task<IActionResult> Results(int projectId, int featureId)
+    {
+        try
+        {
+            var result = await _projectRepository.GetPredictedResulstsByProjectIdAsync(projectId);
+            var project = await _projectRepository.GetProjectWithFeatureByIdAsync(projectId);
+
+            if (project is null)
+            {
+                _logger.LogError($"Project {projectId} could not be found.");
+                return RedirectToAction("Error", "Home");
+            }
+            
+            
+            
+            var vm = new ResultViewModel
+            {
+                ProjectId = projectId,
+                FeaturesetId = featureId,
+                PredictionInputViewModel = ProjectMapper.ToViewModel(project),
+                ProjectName = project.ProjectName,
+                Results = result,
+                Success = true
+            };
+            
+            return View(vm);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Project {projectId} could not be found., {ex}");
+            return RedirectToAction("Error", "Home");
+        }
+        
+    }
+
+    public async Task<IActionResult> Calculate()
+    {
+        return View();
+    }
 
     #region Stepper
         

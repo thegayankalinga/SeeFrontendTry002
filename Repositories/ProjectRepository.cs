@@ -120,4 +120,14 @@ public class ProjectRepository: IProjectRepository
         return result;
     }
 
+    public async Task<List<PredictionResultResponseDto>> GetPredictedResulstsByProjectIdAsync(int projectId)
+    {
+        var results = await _context.PredictionResults.Where(p => p.ProjectId == projectId).AsNoTracking().ToListAsync();
+        
+       
+        var dtos= results.Select(r => ProjectMapper.ResultModelToResultResponseDto(r)).ToList();
+
+        return dtos;
+    }
+
 }

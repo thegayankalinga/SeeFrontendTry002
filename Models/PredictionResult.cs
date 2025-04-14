@@ -14,6 +14,8 @@ public class PredictionResult
     public float QaEffort { get; set; }
     public required PredictionModel ModelName { get; set; } 
     
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
+    
     //one to many
     [ForeignKey("ProjectId")]
     public int ProjectId { get; set; }
