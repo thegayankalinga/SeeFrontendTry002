@@ -2,104 +2,329 @@
 @using SeeFrontendTry002.Models.Enumz
 
 @{
-    ViewData["Title"] = "Step 3 - Architecture & Complexity";
+    ViewData["Title"] = "Architecture & Complexity";
 }
 
-<div class="max-w-4xl mx-auto p-8 mt-10 bg-white rounded-xl shadow-lg">
-    <!-- Stepper UI -->
-    <div class="flex justify-between mb-6">
-        @for (int i = 1; i <= 5; i++)
-        {
-            var stepColor = i == 3 ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-700";
-            <div class="text-center w-1/5">
-                <div class="h-10 w-10 mx-auto rounded-full @stepColor flex items-center justify-center font-bold">@i</div>
-                <div class="mt-2 text-sm text-gray-600">Step @i</div>
+<div class="bg-white rounded-xl shadow-md overflow-hidden">
+    <div class="p-6">
+        <div class="mb-6">
+            <h1 class="text-2xl font-bold text-gray-900">New Project</h1>
+            <p class="text-sm text-gray-500 mt-1">Step 3: Architecture & Complexity</p>
+        </div>
+
+        <!-- Progress steps -->
+        <div class="mb-8">
+            <div class="flex items-center w-full">
+                <div class="flex items-center relative">
+                    <div class="rounded-full transition duration-500 ease-in-out h-12 w-12 py-3 border-2 bg-green-500 border-green-500 text-white font-bold flex items-center justify-center">
+                        <i class="fas fa-check text-sm"></i>
+                    </div>
+                    <div class="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium text-gray-500">Project Info</div>
+                </div>
+                <div class="flex-auto border-t-2 transition duration-500 ease-in-out border-green-500"></div>
+                
+                <div class="flex items-center relative">
+                    <div class="rounded-full transition duration-500 ease-in-out h-12 w-12 py-3 border-2 bg-green-500 border-green-500 text-white font-bold flex items-center justify-center">
+                        <i class="fas fa-check text-sm"></i>
+                    </div>
+                    <div class="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium text-gray-500">Compliance & Tech</div>
+                </div>
+                <div class="flex-auto border-t-2 transition duration-500 ease-in-out border-green-500"></div>
+                
+                <div class="flex items-center relative">
+                    <div class="rounded-full transition duration-500 ease-in-out h-12 w-12 py-3 border-2 border-indigo-600 bg-indigo-600 text-white font-bold flex items-center justify-center">
+                        3
+                    </div>
+                    <div class="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium text-indigo-600">Architecture</div>
+                </div>
+                <div class="flex-auto border-t-2 transition duration-500 ease-in-out border-gray-300"></div>
+                
+                <div class="flex items-center relative">
+                    <div class="rounded-full transition duration-500 ease-in-out h-12 w-12 py-3 border-2 border-gray-300 bg-white text-gray-400 font-bold flex items-center justify-center">
+                        4
+                    </div>
+                    <div class="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium text-gray-500">Integration</div>
+                </div>
+                <div class="flex-auto border-t-2 transition duration-500 ease-in-out border-gray-300"></div>
+                
+                <div class="flex items-center relative">
+                    <div class="rounded-full transition duration-500 ease-in-out h-12 w-12 py-3 border-2 border-gray-300 bg-white text-gray-400 font-bold flex items-center justify-center">
+                        5
+                    </div>
+                    <div class="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium text-gray-500">Review</div>
+                </div>
             </div>
-        }
+        </div>
+
+        <form method="post" asp-action="Step3" class="mt-8">
+            <!-- Ratings Section -->
+            <div class="bg-gray-50 p-6 rounded-lg mb-6 shadow-sm">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-chart-line text-indigo-500 mr-2"></i>
+                    Complexity Ratings
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Dependency Complexity -->
+                    <div>
+                        <label asp-for="DependencyComplexity" class="block text-sm font-medium text-gray-700 mb-1">
+                            Dependency Complexity <span class="text-red-500">*</span>
+                        </label>
+                        <div class="relative">
+                            <div class="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                <i class="fas fa-project-diagram text-gray-400 text-sm"></i>
+                            </div>
+                            <select asp-for="DependencyComplexity" 
+                                    class="pl-10 pr-10 py-2 h-10 w-full appearance-none shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md bg-white">
+                                <option value="">Select Rating</option>
+                                @foreach (var val in Enum.GetValues(typeof(RatingType)))
+                                {
+                                    <option value="@val">@val</option>
+                                }
+                            </select>
+                            <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                <svg class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <span asp-validation-for="DependencyComplexity" class="text-red-500 text-xs mt-1"></span>
+                    </div>
+
+                    <!-- Decision Speed -->
+                    <div>
+                        <label asp-for="DecisionSpeed" class="block text-sm font-medium text-gray-700 mb-1">
+                            Decision Speed <span class="text-red-500">*</span>
+                        </label>
+                        <div class="relative">
+                            <div class="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                <i class="fas fa-tachometer-alt text-gray-400 text-sm"></i>
+                            </div>
+                            <select asp-for="DecisionSpeed" 
+                                    class="pl-10 pr-10 py-2 h-10 w-full appearance-none shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md bg-white">
+                                <option value="">Select Speed</option>
+                                @foreach (var val in Enum.GetValues(typeof(SpeedType)))
+                                {
+                                    <option value="@val">@val</option>
+                                }
+                            </select>
+                            <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                <svg class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <span asp-validation-for="DecisionSpeed" class="text-red-500 text-xs mt-1"></span>
+                    </div>
+
+                    <!-- Client Technical Knowledge -->
+                    <div>
+                        <label asp-for="ClientTechnicalKnowledge" class="block text-sm font-medium text-gray-700 mb-1">
+                            Client Technical Knowledge <span class="text-red-500">*</span>
+                        </label>
+                        <div class="relative">
+                            <div class="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                <i class="fas fa-user-graduate text-gray-400 text-sm"></i>
+                            </div>
+                            <select asp-for="ClientTechnicalKnowledge" 
+                                    class="pl-10 pr-10 py-2 h-10 w-full appearance-none shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md bg-white">
+                                <option value="">Select Rating</option>
+                                @foreach (var val in Enum.GetValues(typeof(RatingType)))
+                                {
+                                    <option value="@val">@val</option>
+                                }
+                            </select>
+                            <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                <svg class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <span asp-validation-for="ClientTechnicalKnowledge" class="text-red-500 text-xs mt-1"></span>
+                    </div>
+
+                    <!-- Device Test Coverage -->
+                    <div>
+                        <label asp-for="DeviceTestCoverage" class="block text-sm font-medium text-gray-700 mb-1">
+                            Device Test Coverage <span class="text-red-500">*</span>
+                        </label>
+                        <div class="relative">
+                            <div class="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                <i class="fas fa-mobile-alt text-gray-400 text-sm"></i>
+                            </div>
+                            <select asp-for="DeviceTestCoverage" 
+                                    class="pl-10 pr-10 py-2 h-10 w-full appearance-none shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md bg-white">
+                                <option value="">Select Rating</option>
+                                @foreach (var val in Enum.GetValues(typeof(RatingType)))
+                                {
+                                    <option value="@val">@val</option>
+                                }
+                            </select>
+                            <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                <svg class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <span asp-validation-for="DeviceTestCoverage" class="text-red-500 text-xs mt-1"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Section -->
+            <div class="bg-gray-50 p-6 rounded-lg mb-6 shadow-sm">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-cogs text-indigo-500 mr-2"></i>
+                    Features & Integrations
+                </h2>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                        <div class="relative flex items-start">
+                            <div class="flex items-center h-5">
+                                <input type="checkbox" asp-for="TestAutomation" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+                            </div>
+                            <div class="ml-3">
+                                <label asp-for="TestAutomation" class="font-medium text-gray-700">Test Automation</label>
+                                <p class="text-gray-500 text-xs mt-1">Automated testing framework</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                        <div class="relative flex items-start">
+                            <div class="flex items-center h-5">
+                                <input type="checkbox" asp-for="MiddlewareAvailability" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+                            </div>
+                            <div class="ml-3">
+                                <label asp-for="MiddlewareAvailability" class="font-medium text-gray-700">Middleware</label>
+                                <p class="text-gray-500 text-xs mt-1">Middleware integration required</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                        <div class="relative flex items-start">
+                            <div class="flex items-center h-5">
+                                <input type="checkbox" asp-for="PaymentProviderIntegration" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+                            </div>
+                            <div class="ml-3">
+                                <label asp-for="PaymentProviderIntegration" class="font-medium text-gray-700">Payment Provider</label>
+                                <p class="text-gray-500 text-xs mt-1">Payment gateway integration</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                        <div class="relative flex items-start">
+                            <div class="flex items-center h-5">
+                                <input type="checkbox" asp-for="FidoIntegration" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+                            </div>
+                            <div class="ml-3">
+                                <label asp-for="FidoIntegration" class="font-medium text-gray-700">FIDO Integration</label>
+                                <p class="text-gray-500 text-xs mt-1">Fast Identity Online standard</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                        <div class="relative flex items-start">
+                            <div class="flex items-center h-5">
+                                <input type="checkbox" asp-for="DataMigration" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+                            </div>
+                            <div class="ml-3">
+                                <label asp-for="DataMigration" class="font-medium text-gray-700">Data Migration</label>
+                                <p class="text-gray-500 text-xs mt-1">Legacy data migration required</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Regression & Languages Section -->
+            <div class="bg-gray-50 p-6 rounded-lg mb-6 shadow-sm">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-language text-indigo-500 mr-2"></i>
+                    Localization & Testing
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Regression Type -->
+                    <div>
+                        <label asp-for="Regression" class="block text-sm font-medium text-gray-700 mb-1">
+                            Regression Type <span class="text-red-500">*</span>
+                        </label>
+                        <div class="relative">
+                            <div class="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                <i class="fas fa-undo text-gray-400 text-sm"></i>
+                            </div>
+                            <select asp-for="Regression" 
+                                    class="pl-10 pr-10 py-2 h-10 w-full appearance-none shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md bg-white">
+                                <option value="">Select Regression Type</option>
+                                @foreach (var val in Enum.GetValues(typeof(RegressionType)))
+                                {
+                                    <option value="@val">@val</option>
+                                }
+                            </select>
+                            <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                <svg class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <span asp-validation-for="Regression" class="text-red-500 text-xs mt-1"></span>
+                    </div>
+
+                    <!-- Number of Languages -->
+                    <div>
+                        <label asp-for="NoOfLanguages" class="block text-sm font-medium text-gray-700 mb-1">
+                            Number of Languages <span class="text-red-500">*</span>
+                        </label>
+                        <div class="relative">
+                            <div class="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                <i class="fas fa-language text-gray-400 text-sm"></i>
+                            </div>
+                            <input asp-for="NoOfLanguages" type="number" min="1" 
+                                   class="pl-10 pr-4 py-2 h-10 w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" 
+                                   placeholder="Enter number of languages" required />
+                        </div>
+                        <span asp-validation-for="NoOfLanguages" class="text-red-500 text-xs mt-1"></span>
+                    </div>
+
+                    <!-- Number of RTL Languages -->
+                    <div>
+                        <label asp-for="NoOfRtlLanguages" class="block text-sm font-medium text-gray-700 mb-1">
+                            Number of RTL Languages
+                        </label>
+                        <div class="relative">
+                            <div class="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                <i class="fas fa-text-width text-gray-400 text-sm"></i>
+                            </div>
+                            <input asp-for="NoOfRtlLanguages" type="number" min="0" 
+                                   class="pl-10 pr-4 py-2 h-10 w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" 
+                                   placeholder="Enter number of RTL languages" />
+                        </div>
+                        <span asp-validation-for="NoOfRtlLanguages" class="text-red-500 text-xs mt-1"></span>
+                        <p class="mt-1 text-xs text-gray-500">Right-to-left languages (e.g., Arabic, Hebrew)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 flex items-center justify-between">
+                <a asp-action="Step2" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    Previous
+                </a>
+                <div>
+                    <span class="text-sm text-gray-500 mr-4">Step 3 of 5</span>
+                    <button type="submit" class="inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-150">
+                        Continue
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
     </div>
-
-    <h2 class="text-2xl font-bold mb-6">Architecture & Complexity</h2>
-
-    <form method="post" asp-action="Step3">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-
-            @* Ratings *@
-            <div>
-                <label asp-for="DependencyComplexity" class="block text-sm font-medium">Dependency Complexity</label>
-                <select asp-for="DependencyComplexity" class="w-full mt-1 border-gray-300 rounded-md shadow-sm">
-                    @foreach (var val in Enum.GetValues(typeof(RatingType)))
-                    {
-                        <option value="@val">@val</option>
-                    }
-                </select>
-            </div>
-
-            <div>
-                <label asp-for="DecisionSpeed" class="block text-sm font-medium">Decision Speed</label>
-                <select asp-for="DecisionSpeed" class="w-full mt-1 border-gray-300 rounded-md shadow-sm">
-                    @foreach (var val in Enum.GetValues(typeof(SpeedType)))
-                    {
-                        <option value="@val">@val</option>
-                    }
-                </select>
-            </div>
-
-            <div>
-                <label asp-for="ClientTechnicalKnowledge" class="block text-sm font-medium">Client Technical Knowledge</label>
-                <select asp-for="ClientTechnicalKnowledge" class="w-full mt-1 border-gray-300 rounded-md shadow-sm">
-                    @foreach (var val in Enum.GetValues(typeof(RatingType)))
-                    {
-                        <option value="@val">@val</option>
-                    }
-                </select>
-            </div>
-
-            <div>
-                <label asp-for="DeviceTestCoverage" class="block text-sm font-medium">Device Test Coverage</label>
-                <select asp-for="DeviceTestCoverage" class="w-full mt-1 border-gray-300 rounded-md shadow-sm">
-                    @foreach (var val in Enum.GetValues(typeof(RatingType)))
-                    {
-                        <option value="@val">@val</option>
-                    }
-                </select>
-            </div>
-
-            <div>
-                <label asp-for="Regression" class="block text-sm font-medium">Regression Type</label>
-                <select asp-for="Regression" class="w-full mt-1 border-gray-300 rounded-md shadow-sm">
-                    @foreach (var val in Enum.GetValues(typeof(RegressionType)))
-                    {
-                        <option value="@val">@val</option>
-                    }
-                </select>
-            </div>
-
-            @* Booleans *@
-            <div class="col-span-2 grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4">
-                <label><input type="checkbox" asp-for="TestAutomation" class="mr-2" /> Test Automation</label>
-                <label><input type="checkbox" asp-for="MiddlewareAvailability" class="mr-2" /> Middleware</label>
-                <label><input type="checkbox" asp-for="PaymentProviderIntegration" class="mr-2" /> Payment Provider</label>
-                <label><input type="checkbox" asp-for="FidoIntegration" class="mr-2" /> FIDO Integration</label>
-                <label><input type="checkbox" asp-for="DataMigration" class="mr-2" /> Data Migration</label>
-            </div>
-
-            @* Multilingual *@
-            <div>
-                <label asp-for="NoOfLanguages" class="block text-sm font-medium"># of Languages</label>
-                <input asp-for="NoOfLanguages" class="w-full mt-1 border-gray-300 rounded-md shadow-sm" type="number" />
-            </div>
-
-            <div>
-                <label asp-for="NoOfRtlLanguages" class="block text-sm font-medium"># of RTL Languages</label>
-                <input asp-for="NoOfRtlLanguages" class="w-full mt-1 border-gray-300 rounded-md shadow-sm" type="number" />
-            </div>
-        </div>
-
-        <div class="mt-8 flex justify-between">
-            <a asp-action="Step2" class="text-gray-600 hover:underline">← Back</a>
-            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">Next</button>
-        </div>
-    </form>
 </div>
 
 @section Scripts {
