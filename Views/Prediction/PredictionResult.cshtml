@@ -3,25 +3,150 @@
     ViewData["Title"] = "Prediction Results";
 }
 
-<div class="max-w-2xl mx-auto p-8 mt-10 bg-white rounded-xl shadow-lg text-center">
-    <h2 class="text-2xl font-bold text-blue-700 mb-4">Prediction Results</h2>
-
-    @if (Model.Success)
-    {
-        <div class="text-left space-y-3">
-            <p><strong>Model:</strong> @Model.Model</p>
-            <p><strong>Delivery Effort:</strong> @Model.Predictions.DeliveryEffort</p>
-            <p><strong>Engineering Effort:</strong> @Model.Predictions.EngineeringEffort</p>
-            <p><strong>DevOps Effort:</strong> @Model.Predictions.DevOpsEffort</p>
-            <p><strong>QA Effort:</strong> @Model.Predictions.QaEffort</p>
+<div class="bg-white rounded-xl shadow-md overflow-hidden">
+    <div class="p-6">
+        <div class="mb-6">
+            <h1 class="text-2xl font-bold text-gray-900">Prediction Results</h1>
+            <p class="text-sm text-gray-500 mt-1">Estimated effort for your project</p>
         </div>
-    }
-    else
-    {
-        <p class="text-red-600">Prediction failed. Please try again.</p>
-    }
 
-    <div class="mt-8">
-        <a asp-action="Index" class="bg-gray-600 text-white px-6 py-2 rounded hover:bg-gray-700">Close</a>
+        <div class="bg-gray-50 p-6 rounded-lg mb-6 shadow-sm">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                <i class="fas fa-chart-line text-indigo-500 mr-2"></i>
+                Effort Estimates
+            </h2>
+            
+            @if (Model.Success)
+            {
+                <div class="bg-white p-5 rounded-lg border border-gray-200">
+                    <div class="mb-3 pb-3 border-b border-gray-100">
+                        <p class="text-sm text-gray-500 mb-1">Prediction Model</p>
+                        <p class="font-medium flex items-center">
+                            <i class="fas fa-brain text-indigo-400 mr-2"></i>
+                            @Model.Model
+                        </p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="bg-blue-100 p-2 rounded-full">
+                                        <i class="fas fa-truck-loading text-blue-600"></i>
+                                    </div>
+                                    <h3 class="ml-3 text-sm font-medium text-gray-900">Delivery</h3>
+                                </div>
+                                <span class="text-xl font-bold text-blue-700">@Model.Predictions.DeliveryEffort</span>
+                            </div>
+                            <p class="mt-1 text-xs text-gray-500">Person-days</p>
+                        </div>
+                        
+                        <div class="bg-indigo-50 p-4 rounded-lg">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="bg-indigo-100 p-2 rounded-full">
+                                        <i class="fas fa-code text-indigo-600"></i>
+                                    </div>
+                                    <h3 class="ml-3 text-sm font-medium text-gray-900">Engineering</h3>
+                                </div>
+                                <span class="text-xl font-bold text-indigo-700">@Model.Predictions.EngineeringEffort</span>
+                            </div>
+                            <p class="mt-1 text-xs text-gray-500">Person-days</p>
+                        </div>
+                        
+                        <div class="bg-purple-50 p-4 rounded-lg">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="bg-purple-100 p-2 rounded-full">
+                                        <i class="fas fa-server text-purple-600"></i>
+                                    </div>
+                                    <h3 class="ml-3 text-sm font-medium text-gray-900">DevOps</h3>
+                                </div>
+                                <span class="text-xl font-bold text-purple-700">@Model.Predictions.DevOpsEffort</span>
+                            </div>
+                            <p class="mt-1 text-xs text-gray-500">Person-days</p>
+                        </div>
+                        
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="bg-green-100 p-2 rounded-full">
+                                        <i class="fas fa-check-circle text-green-600"></i>
+                                    </div>
+                                    <h3 class="ml-3 text-sm font-medium text-gray-900">QA</h3>
+                                </div>
+                                <span class="text-xl font-bold text-green-700">@Model.Predictions.QaEffort</span>
+                            </div>
+                            <p class="mt-1 text-xs text-gray-500">Person-days</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 pt-4 border-t border-gray-100">
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="bg-gray-200 p-2 rounded-full">
+                                        <i class="fas fa-users text-gray-600"></i>
+                                    </div>
+                                    <h3 class="ml-3 text-sm font-medium text-gray-900">Total Effort</h3>
+                                </div>
+                                <span class="text-xl font-bold text-gray-800">
+                                    @(Model.Predictions.DeliveryEffort + Model.Predictions.EngineeringEffort + Model.Predictions.DevOpsEffort + Model.Predictions.QaEffort)
+                                </span>
+                            </div>
+                            <p class="mt-1 text-xs text-gray-500">Total person-days</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-4 bg-yellow-50 p-4 rounded-lg border border-yellow-100">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-info-circle text-yellow-500"></i>
+                        </div>
+                        <div class="ml-3">
+                            <h3 class="text-sm font-medium text-yellow-800">Important Note</h3>
+                            <div class="mt-2 text-sm text-yellow-700">
+                                <p>These estimates are based on AI predictions and should be used as guidance only. Actual effort may vary based on unforeseen circumstances, changes in requirements, or other factors.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="bg-red-50 p-4 rounded-lg border border-red-100">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-exclamation-circle text-red-500"></i>
+                        </div>
+                        <div class="ml-3">
+                            <h3 class="text-sm font-medium text-red-800">Prediction Failed</h3>
+                            <div class="mt-2 text-sm text-red-700">
+                                <p>There was an error generating your effort estimation. Please try again or contact support if the issue persists.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        
+        <div class="mt-8 flex justify-between">
+            <a asp-controller="Prediction" asp-action="Index" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                <i class="fas fa-list mr-2"></i>
+                Back to Projects
+            </a>
+            
+            <a asp-controller="Prediction" asp-action="Create" class="inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-150">
+                New Prediction
+                <i class="fas fa-plus ml-2"></i>
+            </a>
+        </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        // Optional: Add any JavaScript you might need, such as animations
+    </script>
+}
