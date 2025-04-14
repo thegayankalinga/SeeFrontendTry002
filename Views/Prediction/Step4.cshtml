@@ -1,0 +1,88 @@
+@model SeeFrontendTry002.ViewModels.PredictionInputViewModel
+
+@{
+    ViewData["Title"] = "Step 4 - QA, Performance, Integration";
+}
+
+<div class="max-w-4xl mx-auto p-8 mt-10 bg-white rounded-xl shadow-lg">
+    <!-- Stepper UI -->
+    <div class="flex justify-between mb-6">
+        @for (int i = 1; i <= 5; i++)
+        {
+            var stepColor = i == 4 ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-700";
+            <div class="text-center w-1/5">
+                <div class="h-10 w-10 mx-auto rounded-full @stepColor flex items-center justify-center font-bold">@i</div>
+                <div class="mt-2 text-sm text-gray-600">Step @i</div>
+            </div>
+        }
+    </div>
+
+    <h2 class="text-2xl font-bold mb-6">Performance, QA & Integration</h2>
+
+    <form method="post" asp-action="Step4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <!-- Performance -->
+            <div>
+                <label asp-for="TpsRequired" class="block text-sm font-medium">TPS Required</label>
+                <input asp-for="TpsRequired" type="number" class="mt-1 w-full rounded-md border-gray-300 shadow-sm" />
+            </div>
+
+            <div>
+                <label asp-for="WarrantyMonths" class="block text-sm font-medium">Warranty Months</label>
+                <input asp-for="WarrantyMonths" type="number" class="mt-1 w-full rounded-md border-gray-300 shadow-sm" />
+            </div>
+
+            <!-- Functional Breakdown -->
+            <div>
+                <label asp-for="NoOfFunctionalModules" class="block text-sm font-medium"># Functional Modules</label>
+                <input asp-for="NoOfFunctionalModules" type="number" class="mt-1 w-full rounded-md border-gray-300 shadow-sm" />
+            </div>
+
+            <div>
+                <label asp-for="NoOfNoneFunctionalModules" class="block text-sm font-medium"># Non-Functional Modules</label>
+                <input asp-for="NoOfNoneFunctionalModules" type="number" class="mt-1 w-full rounded-md border-gray-300 shadow-sm" />
+            </div>
+
+            <!-- QA -->
+            <div>
+                <label asp-for="NoOfUatCycles" class="block text-sm font-medium">UAT Cycles</label>
+                <input asp-for="NoOfUatCycles" type="number" class="mt-1 w-full rounded-md border-gray-300 shadow-sm" />
+            </div>
+
+            <div>
+                <label asp-for="CodeTestCoverage" class="block text-sm font-medium">Code Test Coverage (%)</label>
+                <input asp-for="CodeTestCoverage" type="number" step="0.1" class="mt-1 w-full rounded-md border-gray-300 shadow-sm" />
+            </div>
+
+            <!-- Integration Points -->
+            <div>
+                <label asp-for="RestIntegrationPoints" class="block text-sm font-medium">REST Integration Points</label>
+                <input asp-for="RestIntegrationPoints" type="number" class="mt-1 w-full rounded-md border-gray-300 shadow-sm" />
+            </div>
+
+            <div>
+                <label asp-for="SoapIntegrationPoints" class="block text-sm font-medium">SOAP Integration Points</label>
+                <input asp-for="SoapIntegrationPoints" type="number" class="mt-1 w-full rounded-md border-gray-300 shadow-sm" />
+            </div>
+
+            <div>
+                <label asp-for="Iso8583IntegrationPoints" class="block text-sm font-medium">ISO8583 Integration Points</label>
+                <input asp-for="Iso8583IntegrationPoints" type="number" class="mt-1 w-full rounded-md border-gray-300 shadow-sm" />
+            </div>
+
+            <div>
+                <label asp-for="SdkIntegrationPoints" class="block text-sm font-medium">SDK Integration Points</label>
+                <input asp-for="SdkIntegrationPoints" type="number" class="mt-1 w-full rounded-md border-gray-300 shadow-sm" />
+            </div>
+        </div>
+
+        <div class="mt-8 flex justify-between">
+            <a asp-action="Step3" class="text-gray-600 hover:underline">← Back</a>
+            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">Next</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

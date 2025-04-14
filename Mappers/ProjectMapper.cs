@@ -91,11 +91,13 @@ public static class ProjectMapper
     {
         return new PredictionResponseDetailsDto
         {
+            
             ProjectId = project.ProjectId,
             ProjectName = project.ProjectName,
             Region = project.Region,
             FeatureData = new FeatureDataResponseDto
             {
+                FeatureSetId = featureData.FeatureSetId,
                 DevEnvironment = featureData.DevEnvironment,
                 SitEnvironment = featureData.SitEnvironment,
                 UatEnvironment = featureData.UatEnvironment,

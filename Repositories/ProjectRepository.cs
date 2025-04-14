@@ -4,6 +4,7 @@ using SeeFrontendTry002.Dtos;
 using SeeFrontendTry002.Interface;
 using SeeFrontendTry002.Mappers;
 using SeeFrontendTry002.Models;
+using SeeFrontendTry002.Models.Enumz;
 
 namespace SeeFrontendTry002.Repositories;
 
@@ -45,6 +46,31 @@ public class ProjectRepository: IProjectRepository
         {
             _logger.LogError(ex, "Error saving project and feature data.");
             return null;
+        }
+    }
+    
+    public async Task<bool> SavePredictionResultAsync(int projectId, int featureSetId, PredictionModel predictionModel, PredictionApiResponseDto dto)
+    {
+        try
+        {
+            var result = new PredictionResult
+            {
+                ProjectId = projectId,
+                FeatureSetId = featureSetId,
+                ModelName = predictionModel,
+                DeliveryEffort = dto.Predictions.DeliveryEffort,
+                EngineeringEffort = dto.Predictions.EngineeringEffort,
+                DevOpsEffort = dto.Predictions.DevOpsEffort,
+                QaEffort = dto.Predictions.QaEffort
+            };
+            _context.PredictionResults.Add(result);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error saving prediction result.");
+            return false;
         }
     }
     

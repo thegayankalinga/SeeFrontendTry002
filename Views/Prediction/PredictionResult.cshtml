@@ -1,0 +1,27 @@
+@model SeeFrontendTry002.Dtos.PredictionApiResponseDto
+@{
+    ViewData["Title"] = "Prediction Results";
+}
+
+<div class="max-w-2xl mx-auto p-8 mt-10 bg-white rounded-xl shadow-lg text-center">
+    <h2 class="text-2xl font-bold text-blue-700 mb-4">Prediction Results</h2>
+
+    @if (Model.Success)
+    {
+        <div class="text-left space-y-3">
+            <p><strong>Model:</strong> @Model.Model</p>
+            <p><strong>Delivery Effort:</strong> @Model.Predictions.DeliveryEffort</p>
+            <p><strong>Engineering Effort:</strong> @Model.Predictions.EngineeringEffort</p>
+            <p><strong>DevOps Effort:</strong> @Model.Predictions.DevOpsEffort</p>
+            <p><strong>QA Effort:</strong> @Model.Predictions.QaEffort</p>
+        </div>
+    }
+    else
+    {
+        <p class="text-red-600">Prediction failed. Please try again.</p>
+    }
+
+    <div class="mt-8">
+        <a asp-action="Index" class="bg-gray-600 text-white px-6 py-2 rounded hover:bg-gray-700">Close</a>
+    </div>
+</div>

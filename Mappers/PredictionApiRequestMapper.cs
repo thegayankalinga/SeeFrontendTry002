@@ -1,5 +1,6 @@
 using SeeFrontendTry002.Dtos;
 using SeeFrontendTry002.Models.Enumz;
+using SeeFrontendTry002.Utilz;
 
 namespace SeeFrontendTry002.Mappers;
 
@@ -12,7 +13,7 @@ public static class PredictionApiRequestMapper
         var features = new List<string>
         {
             //Region (should bea one of value form the Region Enum
-            inputFeatures.Region.GetTypeCode().ToString(),
+            inputFeatures.Region.GetEnumMemberValue(),
             
             //Environments
             BoolToYesNo(inputFeatures.FeatureData.DevEnvironment),
@@ -28,27 +29,27 @@ public static class PredictionApiRequestMapper
             BoolToYesNo(inputFeatures.FeatureData.CountrySpecificCompliance),
             
             //Technology
-            inputFeatures.FeatureData.BackendType.GetTypeCode().ToString(),
-            inputFeatures.FeatureData.FrontendType.GetTypeCode().ToString(),
-            inputFeatures.FeatureData.MobileType.GetTypeCode().ToString(),
-            inputFeatures.FeatureData.DatabaseType.GetTypeCode().ToString(),
+            inputFeatures.FeatureData.BackendType.GetEnumMemberValue(),
+            inputFeatures.FeatureData.FrontendType.GetEnumMemberValue(),
+            inputFeatures.FeatureData.MobileType.GetEnumMemberValue(),
+            inputFeatures.FeatureData.DatabaseType.GetEnumMemberValue(),
             
             //SSO
             BoolToYesNo(inputFeatures.FeatureData.GoogleSso),
             BoolToYesNo(inputFeatures.FeatureData.AppleSso),
             BoolToYesNo(inputFeatures.FeatureData.FacebookSso),
-            inputFeatures.FeatureData.IamVendor.GetTypeCode().ToString(),
+            inputFeatures.FeatureData.IamVendor.GetEnumMemberValue(),
             
             //Infra
-            inputFeatures.FeatureData.InfraProvider.GetTypeCode().ToString(),
+            inputFeatures.FeatureData.InfraProvider.GetEnumMemberValue(),
             
             //Qualitative Features
-            inputFeatures.FeatureData.DependencyComplexity.GetTypeCode().ToString(),
-            inputFeatures.FeatureData.DecisionSpeed.GetTypeCode().ToString(),
-            inputFeatures.FeatureData.ClientTechnicalKnowledge.GetTypeCode().ToString(),
-            inputFeatures.FeatureData.DeviceTestCoverage.GetTypeCode().ToString(),
+            inputFeatures.FeatureData.DependencyComplexity.GetEnumMemberValue(),
+            inputFeatures.FeatureData.DecisionSpeed.GetEnumMemberValue(),
+            inputFeatures.FeatureData.ClientTechnicalKnowledge.GetEnumMemberValue(),
+            inputFeatures.FeatureData.DeviceTestCoverage.GetEnumMemberValue(),
             BoolToYesNo(inputFeatures.FeatureData.TestAutomation),
-            inputFeatures.FeatureData.Regression.GetTypeCode().ToString(),
+            inputFeatures.FeatureData.Regression.GetEnumMemberValue(),
             
             //Other Services
             BoolToYesNo(inputFeatures.FeatureData.MiddlewareAvailability),
@@ -98,7 +99,7 @@ public static class PredictionApiRequestMapper
         return new PredictionApiRequestDto()
         {
             Features = features.Select(f => f.ToString()).ToList(),
-            ModelName = predictionModel.GetTypeCode().ToString(),
+            ModelName = predictionModel.GetEnumMemberValue(),
         };
     }
     

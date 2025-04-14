@@ -1,0 +1,125 @@
+@model SeeFrontendTry002.ViewModels.PredictionInputViewModel
+@using SeeFrontendTry002.Models.Enumz
+
+@{
+    ViewData["Title"] = "Step 2 - Compliance & Technology";
+}
+
+<div class="max-w-4xl mx-auto p-8 mt-10 bg-white rounded-xl shadow-lg">
+    <!-- Stepper UI -->
+    <div class="flex justify-between mb-6">
+        @for (int i = 1; i <= 5; i++)
+        {
+            var stepColor = i == 2 ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-700";
+            <div class="text-center w-1/5">
+                <div class="h-10 w-10 mx-auto rounded-full @stepColor flex items-center justify-center font-bold">@i</div>
+                <div class="mt-2 text-sm text-gray-600">Step @i</div>
+            </div>
+        }
+    </div>
+
+    <h2 class="text-2xl font-bold mb-6">Compliance, Tech Stack, SSO & Infra</h2>
+
+    <form method="post" asp-action="Step2">
+        <div class="space-y-6">
+
+            <!-- Compliance -->
+            <fieldset>
+                <legend class="text-lg font-semibold mb-2">Compliance</legend>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <label><input type="checkbox" asp-for="CompliancePciSff" class="mr-2" /> PCI SFF Compliance</label>
+                    <label><input type="checkbox" asp-for="CountrySpecificCompliance" class="mr-2" /> Country-Specific Compliance</label>
+                </div>
+            </fieldset>
+
+            <!-- Tech Stack -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div>
+                    <label asp-for="BackendType" class="block text-sm font-medium">Backend Type</label>
+                    <select asp-for="BackendType" class="w-full mt-1 rounded-md border-gray-300 shadow-sm">
+                        <option value="">Select Backend</option>
+                        @foreach (var val in Enum.GetValues(typeof(BackendType)))
+                        {
+                            <option value="@val">@val</option>
+                        }
+                    </select>
+                </div>
+
+                <div>
+                    <label asp-for="FrontendType" class="block text-sm font-medium">Frontend Type</label>
+                    <select asp-for="FrontendType" class="w-full mt-1 rounded-md border-gray-300 shadow-sm">
+                        <option value="">Select Frontend</option>
+                        @foreach (var val in Enum.GetValues(typeof(FrontendType)))
+                        {
+                            <option value="@val">@val</option>
+                        }
+                    </select>
+                </div>
+
+                <div>
+                    <label asp-for="MobileType" class="block text-sm font-medium">Mobile Type</label>
+                    <select asp-for="MobileType" class="w-full mt-1 rounded-md border-gray-300 shadow-sm">
+                        <option value="">Select Mobile</option>
+                        @foreach (var val in Enum.GetValues(typeof(MobileType)))
+                        {
+                            <option value="@val">@val</option>
+                        }
+                    </select>
+                </div>
+
+                <div>
+                    <label asp-for="DatabaseType" class="block text-sm font-medium">Database Type</label>
+                    <select asp-for="DatabaseType" class="w-full mt-1 rounded-md border-gray-300 shadow-sm">
+                        <option value="">Select Database</option>
+                        @foreach (var val in Enum.GetValues(typeof(DatabaseType)))
+                        {
+                            <option value="@val">@val</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <!-- SSO -->
+            <fieldset>
+                <legend class="text-lg font-semibold mb-2">SSO Integration</legend>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <label><input type="checkbox" asp-for="GoogleSso" class="mr-2" /> Google</label>
+                    <label><input type="checkbox" asp-for="AppleSso" class="mr-2" /> Apple</label>
+                    <label><input type="checkbox" asp-for="FacebookSso" class="mr-2" /> Facebook</label>
+                </div>
+
+                <div class="mt-4">
+                    <label asp-for="IamVendor" class="block text-sm font-medium">IAM Vendor</label>
+                    <select asp-for="IamVendor" class="w-full mt-1 rounded-md border-gray-300 shadow-sm">
+                        <option value="">Select Vendor</option>
+                        @foreach (var val in Enum.GetValues(typeof(IamVendorType)))
+                        {
+                            <option value="@val">@val</option>
+                        }
+                    </select>
+                </div>
+            </fieldset>
+
+            <!-- Infra -->
+            <div class="mt-6">
+                <label asp-for="InfraProvider" class="block text-sm font-medium">Infrastructure Provider</label>
+                <select asp-for="InfraProvider" class="w-full mt-1 rounded-md border-gray-300 shadow-sm">
+                    <option value="">Select Infra</option>
+                    @foreach (var val in Enum.GetValues(typeof(InfraType)))
+                    {
+                        <option value="@val">@val</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="mt-8 flex justify-between">
+            <a asp-action="Step1" class="text-gray-600 hover:underline">← Back</a>
+            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">Next</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,48 @@
+@model IEnumerable<SeeFrontendTry002.Dtos.PredictionResponseDetailsDto>
+@{
+    ViewData["Title"] = "Projects Overview";
+    var search = ViewData["SearchName"] as string ?? "";
+}
+
+<div class="max-w-7xl mx-auto mt-10 px-4">
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold text-gray-800">Saved Projects</h2>
+        <a asp-action="Step1" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">+ Add New</a>
+    </div>
+
+    <form method="get" class="mb-4">
+        <input type="text" name="searchName" value="@search"
+               placeholder="Search by Project Name"
+               class="w-full sm:w-64 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+    </form>
+
+    <div class="overflow-x-auto bg-white shadow-md rounded-xl">
+        <table class="min-w-full table-auto text-left text-sm text-gray-700">
+            <thead class="bg-gray-100 text-xs uppercase">
+                <tr>
+                    <th class="px-6 py-4">ID</th>
+                    <th class="px-6 py-4">Project Name</th>
+                    <th class="px-6 py-4">Region</th>
+                    <th class="px-6 py-4">Prediction Model</th>
+                    <th class="px-6 py-4">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var project in Model)
+                {
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="px-6 py-4">@project.ProjectId</td>
+                        <td class="px-6 py-4">@project.ProjectName</td>
+                        <td class="px-6 py-4">@project.Region</td>
+                        @* <td class="px-6 py-4">@project.PredictionModel</td> *@
+                        <td class="px-6 py-4 space-x-2">
+                            <a href="#" class="text-blue-600 hover:underline">View FeatureData</a>
+                            <a href="#" class="text-green-600 hover:underline">View Result</a>
+                            <a href="#" class="text-indigo-600 hover:underline">Calculate Result</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

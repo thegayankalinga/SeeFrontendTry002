@@ -1,0 +1,86 @@
+@model SeeFrontendTry002.ViewModels.PredictionInputViewModel
+@{
+    ViewData["Title"] = "Step 5 - Review & Submit";
+}
+
+<div class="max-w-4xl mx-auto p-8 mt-10 bg-white rounded-xl shadow-lg">
+    <div class="flex justify-between mb-6">
+        @for (int i = 1; i <= 5; i++)
+        {
+            var stepColor = i == 5 ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-700";
+            <div class="text-center w-1/5">
+                <div class="h-10 w-10 mx-auto rounded-full @stepColor flex items-center justify-center font-bold">@i</div>
+                <div class="mt-2 text-sm text-gray-600">Step @i</div>
+            </div>
+        }
+    </div>
+
+    <h2 class="text-2xl font-bold mb-4 text-gray-800">Review Your Submission</h2>
+
+    <div class="bg-gray-100 p-4 rounded-lg mb-6 text-sm">
+        <p><strong>Project:</strong> @Model.ProjectName</p>
+        <p><strong>Region:</strong> @Model.Region</p>
+        <p><strong>Prediction Model:</strong> @Model.PredictionModelName</p>
+        <p><strong>Environments:</strong> 
+            @(Model.DevEnvironment ? "Dev " : "")
+            @(Model.SitEnvironment ? "SIT " : "")
+            @(Model.UatEnvironment ? "UAT " : "")
+            @(Model.StagingEnvironment ? "Staging " : "")
+            @(Model.ProductionEnvironment ? "Prod " : "")
+            @(Model.DrEnvironment ? "DR " : "")</p>
+        <p><strong>TPS:</strong> @Model.TpsRequired</p>
+        <p><strong>Languages:</strong> @Model.NoOfLanguages (RTL: @Model.NoOfRtlLanguages)</p>
+        <p><strong>Modules:</strong> @Model.NoOfFunctionalModules Functional / @Model.NoOfNoneFunctionalModules Non-Functional</p>
+        <p><strong>Integrations:</strong> REST(@Model.RestIntegrationPoints), SOAP(@Model.SoapIntegrationPoints), ISO8583(@Model.Iso8583IntegrationPoints)</p>
+    </div>
+
+    <form asp-controller="Prediction" asp-action="Predict" method="post">
+        @* Include hidden fields to persist values if needed *@
+        @Html.HiddenFor(m => m.ProjectName)
+        @Html.HiddenFor(m => m.Region)
+        @Html.HiddenFor(m => m.PredictionModelName)
+        @Html.HiddenFor(m => m.DevEnvironment)
+        @Html.HiddenFor(m => m.SitEnvironment)
+        @Html.HiddenFor(m => m.UatEnvironment)
+        @Html.HiddenFor(m => m.StagingEnvironment)
+        @Html.HiddenFor(m => m.ProductionEnvironment)
+        @Html.HiddenFor(m => m.DrEnvironment)
+        @Html.HiddenFor(m => m.CompliancePciSff)
+        @Html.HiddenFor(m => m.CountrySpecificCompliance)
+        @Html.HiddenFor(m => m.BackendType)
+        @Html.HiddenFor(m => m.FrontendType)
+        @Html.HiddenFor(m => m.MobileType)
+        @Html.HiddenFor(m => m.DatabaseType)
+        @Html.HiddenFor(m => m.GoogleSso)
+        @Html.HiddenFor(m => m.AppleSso)
+        @Html.HiddenFor(m => m.FacebookSso)
+        @Html.HiddenFor(m => m.IamVendor)
+        @Html.HiddenFor(m => m.InfraProvider)
+        @Html.HiddenFor(m => m.DependencyComplexity)
+        @Html.HiddenFor(m => m.DecisionSpeed)
+        @Html.HiddenFor(m => m.ClientTechnicalKnowledge)
+        @Html.HiddenFor(m => m.DeviceTestCoverage)
+        @Html.HiddenFor(m => m.TestAutomation)
+        @Html.HiddenFor(m => m.Regression)
+        @Html.HiddenFor(m => m.MiddlewareAvailability)
+        @Html.HiddenFor(m => m.PaymentProviderIntegration)
+        @Html.HiddenFor(m => m.FidoIntegration)
+        @Html.HiddenFor(m => m.DataMigration)
+        @Html.HiddenFor(m => m.NoOfLanguages)
+        @Html.HiddenFor(m => m.NoOfRtlLanguages)
+        @Html.HiddenFor(m => m.TpsRequired)
+        @Html.HiddenFor(m => m.WarrantyMonths)
+        @Html.HiddenFor(m => m.NoOfFunctionalModules)
+        @Html.HiddenFor(m => m.NoOfNoneFunctionalModules)
+        @Html.HiddenFor(m => m.NoOfUatCycles)
+        @Html.HiddenFor(m => m.CodeTestCoverage)
+        @Html.HiddenFor(m => m.RestIntegrationPoints)
+        @Html.HiddenFor(m => m.SoapIntegrationPoints)
+        @Html.HiddenFor(m => m.Iso8583IntegrationPoints)
+        @Html.HiddenFor(m => m.SdkIntegrationPoints)
+        <div class="mt-6 flex justify-between">
+            <a asp-action="Step4" class="text-gray-600 hover:underline">← Back</a>
+            <button type="submit" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700">Submit & Predict</button>
+        </div>
+    </form>
+</div>

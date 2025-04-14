@@ -1,5 +1,6 @@
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using SeeFrontendTry002.Dtos;
 using SeeFrontendTry002.Interface;
 
@@ -29,10 +30,23 @@ public class PredictionService : IPredictionService
         
         var jsonResponse = await response.Content.ReadAsStringAsync();
         
-        return JsonSerializer.Deserialize<PredictionApiResponseDto>(jsonResponse, new JsonSerializerOptions
+        var options = new JsonSerializerOptions
         {
-            PropertyNameCaseInsensitive = true 
-            
-        });
+            PropertyNameCaseInsensitive = true,
+            ReadCommentHandling = JsonCommentHandling.Skip,
+            AllowTrailingCommas = true,
+            DefaultIgnoreCondition = JsonIgnoreCondition.Never
+        };
+
+        var result = JsonSerializer.Deserialize<PredictionApiResponseDto>(jsonResponse, options);
+        
+        _logger.LogInformation("Deserialized prediction result - Delivery: {Delivery}, Engineering: {Engineering}, DevOps: {DevOps}, QA: {QA}",
+            result?.Predictions.DeliveryEffort,
+            result?.Predictions.EngineeringEffort,
+            result?.Predictions.DevOpsEffort,
+            result?.Predictions.QaEffort);
+        
+        // _logger.LogInformation("Deserialized Prediction DTO: {@result}", result);
+        return result;
     }
 }

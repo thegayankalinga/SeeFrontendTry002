@@ -1,0 +1,107 @@
+@model SeeFrontendTry002.ViewModels.PredictionInputViewModel
+@using SeeFrontendTry002.Models.Enumz
+
+@{
+    ViewData["Title"] = "Step 3 - Architecture & Complexity";
+}
+
+<div class="max-w-4xl mx-auto p-8 mt-10 bg-white rounded-xl shadow-lg">
+    <!-- Stepper UI -->
+    <div class="flex justify-between mb-6">
+        @for (int i = 1; i <= 5; i++)
+        {
+            var stepColor = i == 3 ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-700";
+            <div class="text-center w-1/5">
+                <div class="h-10 w-10 mx-auto rounded-full @stepColor flex items-center justify-center font-bold">@i</div>
+                <div class="mt-2 text-sm text-gray-600">Step @i</div>
+            </div>
+        }
+    </div>
+
+    <h2 class="text-2xl font-bold mb-6">Architecture & Complexity</h2>
+
+    <form method="post" asp-action="Step3">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+            @* Ratings *@
+            <div>
+                <label asp-for="DependencyComplexity" class="block text-sm font-medium">Dependency Complexity</label>
+                <select asp-for="DependencyComplexity" class="w-full mt-1 border-gray-300 rounded-md shadow-sm">
+                    @foreach (var val in Enum.GetValues(typeof(RatingType)))
+                    {
+                        <option value="@val">@val</option>
+                    }
+                </select>
+            </div>
+
+            <div>
+                <label asp-for="DecisionSpeed" class="block text-sm font-medium">Decision Speed</label>
+                <select asp-for="DecisionSpeed" class="w-full mt-1 border-gray-300 rounded-md shadow-sm">
+                    @foreach (var val in Enum.GetValues(typeof(SpeedType)))
+                    {
+                        <option value="@val">@val</option>
+                    }
+                </select>
+            </div>
+
+            <div>
+                <label asp-for="ClientTechnicalKnowledge" class="block text-sm font-medium">Client Technical Knowledge</label>
+                <select asp-for="ClientTechnicalKnowledge" class="w-full mt-1 border-gray-300 rounded-md shadow-sm">
+                    @foreach (var val in Enum.GetValues(typeof(RatingType)))
+                    {
+                        <option value="@val">@val</option>
+                    }
+                </select>
+            </div>
+
+            <div>
+                <label asp-for="DeviceTestCoverage" class="block text-sm font-medium">Device Test Coverage</label>
+                <select asp-for="DeviceTestCoverage" class="w-full mt-1 border-gray-300 rounded-md shadow-sm">
+                    @foreach (var val in Enum.GetValues(typeof(RatingType)))
+                    {
+                        <option value="@val">@val</option>
+                    }
+                </select>
+            </div>
+
+            <div>
+                <label asp-for="Regression" class="block text-sm font-medium">Regression Type</label>
+                <select asp-for="Regression" class="w-full mt-1 border-gray-300 rounded-md shadow-sm">
+                    @foreach (var val in Enum.GetValues(typeof(RegressionType)))
+                    {
+                        <option value="@val">@val</option>
+                    }
+                </select>
+            </div>
+
+            @* Booleans *@
+            <div class="col-span-2 grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4">
+                <label><input type="checkbox" asp-for="TestAutomation" class="mr-2" /> Test Automation</label>
+                <label><input type="checkbox" asp-for="MiddlewareAvailability" class="mr-2" /> Middleware</label>
+                <label><input type="checkbox" asp-for="PaymentProviderIntegration" class="mr-2" /> Payment Provider</label>
+                <label><input type="checkbox" asp-for="FidoIntegration" class="mr-2" /> FIDO Integration</label>
+                <label><input type="checkbox" asp-for="DataMigration" class="mr-2" /> Data Migration</label>
+            </div>
+
+            @* Multilingual *@
+            <div>
+                <label asp-for="NoOfLanguages" class="block text-sm font-medium"># of Languages</label>
+                <input asp-for="NoOfLanguages" class="w-full mt-1 border-gray-300 rounded-md shadow-sm" type="number" />
+            </div>
+
+            <div>
+                <label asp-for="NoOfRtlLanguages" class="block text-sm font-medium"># of RTL Languages</label>
+                <input asp-for="NoOfRtlLanguages" class="w-full mt-1 border-gray-300 rounded-md shadow-sm" type="number" />
+            </div>
+        </div>
+
+        <div class="mt-8 flex justify-between">
+            <a asp-action="Step2" class="text-gray-600 hover:underline">← Back</a>
+            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">Next</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

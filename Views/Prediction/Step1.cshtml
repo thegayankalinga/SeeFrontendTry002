@@ -1,0 +1,80 @@
+@model SeeFrontendTry002.ViewModels.PredictionInputViewModel
+@using SeeFrontendTry002.Models.Enumz
+
+@{
+    ViewData["Title"] = "Step 1 - Project & Environments";
+}
+
+<div class="max-w-4xl mx-auto p-8 mt-10 bg-white rounded-xl shadow-lg">
+    <!-- Stepper UI -->
+    <div class="flex justify-between mb-6">
+        @for (int i = 1; i <= 5; i++)
+        {
+            <div class="text-center w-1/5">
+                <div class="h-10 w-10 mx-auto rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">@i</div>
+                <div class="mt-2 text-sm text-gray-600">
+                    @($"Step {i}")
+                </div>
+            </div>
+        }
+    </div>
+
+    <h2 class="text-2xl font-bold mb-6">Project Info & Environment</h2>
+
+    <form method="post" asp-action="Step1">
+        <div class="space-y-6">
+            <div>
+                <label asp-for="ProjectName" class="block text-sm font-medium">Project Name</label>
+                <input asp-for="ProjectName" class="mt-1 w-full border-gray-300 rounded-md shadow-sm" />
+                <span asp-validation-for="ProjectName" class="text-red-500 text-sm"></span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div>
+                    <label asp-for="Region" class="block text-sm font-medium">Region</label>
+                    <select asp-for="Region" class="mt-1 w-full border-gray-300 rounded-md shadow-sm">
+                        <option value="">-- Select --</option>
+                        @foreach (var val in Enum.GetValues(typeof(Region)))
+                        {
+                            <option value="@val">@val</option>
+                        }
+                    </select>
+                    <span asp-validation-for="Region" class="text-red-500 text-sm"></span>
+                </div>
+
+                <div>
+                    <label asp-for="PredictionModelName" class="block text-sm font-medium">Prediction Model</label>
+                    <select asp-for="PredictionModelName" class="mt-1 w-full border-gray-300 rounded-md shadow-sm">
+                        <option value="">-- Select --</option>
+                        @foreach (var val in Enum.GetValues(typeof(PredictionModel)))
+                        {
+                            <option value="@val">@val</option>
+                        }
+                    </select>
+                    <span asp-validation-for="PredictionModelName" class="text-red-500 text-sm"></span>
+                </div>
+            </div>
+
+            <fieldset>
+                <legend class="text-lg font-semibold mb-2">Environments</legend>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                    <label><input type="checkbox" asp-for="DevEnvironment" class="mr-2" /> Dev</label>
+                    <label><input type="checkbox" asp-for="SitEnvironment" class="mr-2" /> SIT</label>
+                    <label><input type="checkbox" asp-for="UatEnvironment" class="mr-2" /> UAT</label>
+                    <label><input type="checkbox" asp-for="StagingEnvironment" class="mr-2" /> Staging</label>
+                    <label><input type="checkbox" asp-for="TrainingEnvironment" class="mr-2" /> Training</label>
+                    <label><input type="checkbox" asp-for="ProductionEnvironment" class="mr-2" /> Production</label>
+                    <label><input type="checkbox" asp-for="DrEnvironment" class="mr-2" /> DR</label>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="mt-8 flex justify-end">
+            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">Next</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
