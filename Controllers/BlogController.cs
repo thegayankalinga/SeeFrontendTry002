@@ -25,6 +25,18 @@ public class BlogController : Controller
         
         return View("BlogPost");
     }
+    
+    public IActionResult FinTechApproach()
+    {
+        var filePath = Path.Combine(_contentPath, "FinTechApproach.md");
+        var markdown = _markdownService.GetMarkdownFromFile(filePath);
+        var html = _markdownService.ConvertToHtml(markdown);
+        
+        ViewData["Content"] = html;
+        ViewData["Title"] = "FinTech Software Effort Estimation";
+        
+        return View("BlogPost");
+    }
 
     public IActionResult ClassicalML()
     {

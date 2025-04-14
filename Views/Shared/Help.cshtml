@@ -1,0 +1,458 @@
+@{
+    ViewData["Title"] = "Help & User Guide";
+}
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-12">
+        <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight">
+            EffortX User Guide
+        </h1>
+        <p class="mt-5 max-w-xl mx-auto text-xl text-gray-500">
+            Learn how to use our software effort estimation tool effectively
+        </p>
+    </div>
+
+    <!-- Table of Contents -->
+    <div class="bg-white shadow overflow-hidden sm:rounded-lg mb-10">
+        <div class="px-4 py-5 sm:px-6 bg-indigo-50">
+            <h2 class="text-xl font-semibold text-gray-900">Table of Contents</h2>
+        </div>
+        <div class="border-t border-gray-200 px-4 py-5 sm:p-6">
+            <ul class="list-disc pl-5 space-y-2">
+                <li><a href="#getting-started" class="text-indigo-600 hover:text-indigo-900">Getting Started</a></li>
+                <li><a href="#creating-estimation" class="text-indigo-600 hover:text-indigo-900">Creating a New Estimation</a></li>
+                <li><a href="#step1" class="text-indigo-600 hover:text-indigo-900 ml-5">Step 1: Project Basics</a></li>
+                <li><a href="#step2" class="text-indigo-600 hover:text-indigo-900 ml-5">Step 2: Environment Configuration</a></li>
+                <li><a href="#step3" class="text-indigo-600 hover:text-indigo-900 ml-5">Step 3: Technology Stack</a></li>
+                <li><a href="#step4" class="text-indigo-600 hover:text-indigo-900 ml-5">Step 4: Integration Points</a></li>
+                <li><a href="#step5" class="text-indigo-600 hover:text-indigo-900 ml-5">Step 5: Review and Submit</a></li>
+                <li><a href="#results" class="text-indigo-600 hover:text-indigo-900">Understanding Results</a></li>
+                <li><a href="#history" class="text-indigo-600 hover:text-indigo-900">Viewing Estimation History</a></li>
+                <li><a href="#comparing" class="text-indigo-600 hover:text-indigo-900">Comparing Estimations</a></li>
+                <li><a href="#export" class="text-indigo-600 hover:text-indigo-900">Exporting Results</a></li>
+                <li><a href="#models" class="text-indigo-600 hover:text-indigo-900">Understanding Our Models</a></li>
+                <li><a href="#faq" class="text-indigo-600 hover:text-indigo-900">FAQ</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Getting Started -->
+    <div id="getting-started" class="bg-white shadow overflow-hidden sm:rounded-lg mb-10">
+        <div class="px-4 py-5 sm:px-6 bg-indigo-50">
+            <h2 class="text-xl font-semibold text-gray-900">Getting Started</h2>
+        </div>
+        <div class="border-t border-gray-200 px-4 py-5 sm:p-6">
+            <p class="mb-4">
+                EffortX is an advanced software effort estimation tool designed specifically for FinTech projects. It uses machine learning and deep learning models to provide accurate effort estimates across four key dimensions:
+            </p>
+            <ul class="list-disc pl-5 mb-4 space-y-1">
+                <li><strong>Delivery:</strong> Project management and coordination efforts</li>
+                <li><strong>Engineering:</strong> Core development work</li>
+                <li><strong>DevOps:</strong> Infrastructure and deployment efforts</li>
+                <li><strong>QA:</strong> Testing and quality assurance activities</li>
+            </ul>
+            <p>
+                To start using EffortX, navigate to the <a href="/Estimate/New" class="text-indigo-600 hover:text-indigo-900">New Estimation</a> page from the main menu.
+            </p>
+        </div>
+    </div>
+
+    <!-- Creating a New Estimation -->
+    <div id="creating-estimation" class="bg-white shadow overflow-hidden sm:rounded-lg mb-10">
+        <div class="px-4 py-5 sm:px-6 bg-indigo-50">
+            <h2 class="text-xl font-semibold text-gray-900">Creating a New Estimation</h2>
+        </div>
+        <div class="border-t border-gray-200 px-4 py-5 sm:p-6">
+            <p class="mb-4">
+                The estimation process involves completing 5 steps to provide all necessary information about your project. Each step focuses on different aspects of your project.
+            </p>
+            <p class="mb-4">
+                You can navigate between steps using the "NEXT" and "BACK" buttons at the bottom of each form. Your progress is saved as you move through the steps.
+            </p>
+            <p>
+                You can also choose the estimation model to use (Deep Learning, Classical ML, or Hybrid) by selecting from the dropdown at the top of the form.
+            </p>
+        </div>
+    </div>
+
+    <!-- Step 1: Project Basics -->
+    <div id="step1" class="bg-white shadow overflow-hidden sm:rounded-lg mb-10">
+        <div class="px-4 py-5 sm:px-6 bg-indigo-50">
+            <h2 class="text-xl font-semibold text-gray-900">Step 1: Project Basics</h2>
+        </div>
+        <div class="border-t border-gray-200 px-4 py-5 sm:p-6">
+            <p class="mb-4">
+                In this step, provide basic information about your project:
+            </p>
+            <ul class="list-disc pl-5 mb-4 space-y-2">
+                <li><strong>Project Name:</strong> Enter a unique name for your project</li>
+                <li><strong>Region:</strong> Select the geographic region where the project will be deployed</li>
+                <li><strong>Number of Languages:</strong> Specify how many languages your application will support</li>
+                <li><strong>RTL Languages:</strong> Indicate if you need support for right-to-left languages</li>
+                <li><strong>TPS Required:</strong> Enter the transactions per second requirement</li>
+                <li><strong>Functional Modules:</strong> Specify the number of functional modules in your application</li>
+                <li><strong>Non-Functional Modules:</strong> Specify the number of non-functional modules</li>
+            </ul>
+            <div class="mt-4 bg-gray-50 p-4 rounded-md">
+                <p class="text-sm text-gray-700">
+                    <strong>Tip:</strong> Be as accurate as possible with the number of modules, as this significantly impacts the effort estimation.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Step 2: Environment Configuration -->
+    <div id="step2" class="bg-white shadow overflow-hidden sm:rounded-lg mb-10">
+        <div class="px-4 py-5 sm:px-6 bg-indigo-50">
+            <h2 class="text-xl font-semibold text-gray-900">Step 2: Environment Configuration</h2>
+        </div>
+        <div class="border-t border-gray-200 px-4 py-5 sm:p-6">
+            <p class="mb-4">
+                Select all the environments your application will need to be deployed to:
+            </p>
+            <ul class="list-disc pl-5 mb-4 space-y-2">
+                <li><strong>Development:</strong> For ongoing development work</li>
+                <li><strong>UAT:</strong> User Acceptance Testing environment</li>
+                <li><strong>Training:</strong> Environment for training users</li>
+                <li><strong>DR:</strong> Disaster Recovery environment</li>
+                <li><strong>SIT:</strong> System Integration Testing environment</li>
+                <li><strong>Staging:</strong> Pre-production environment</li>
+                <li><strong>Production:</strong> Live environment for end users</li>
+            </ul>
+            <div class="mt-4 bg-gray-50 p-4 rounded-md">
+                <p class="text-sm text-gray-700">
+                    <strong>Note:</strong> Each additional environment increases the overall DevOps effort required for your project.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Step 3: Technology Stack -->
+    <div id="step3" class="bg-white shadow overflow-hidden sm:rounded-lg mb-10">
+        <div class="px-4 py-5 sm:px-6 bg-indigo-50">
+            <h2 class="text-xl font-semibold text-gray-900">Step 3: Technology Stack</h2>
+        </div>
+        <div class="border-t border-gray-200 px-4 py-5 sm:p-6">
+            <p class="mb-4">
+                Specify the technologies you'll be using for your project:
+            </p>
+            <ul class="list-disc pl-5 mb-4 space-y-2">
+                <li><strong>Backend:</strong> Select your backend technology (Java, Python, Node.js, etc.)</li>
+                <li><strong>Frontend:</strong> Select your frontend framework (ReactJS, Angular, Vue.js, etc.)</li>
+                <li><strong>Mobile:</strong> If applicable, select your mobile development framework (Flutter, React Native, etc.)</li>
+                <li><strong>Database:</strong> Select your database technology (MySQL, PostgreSQL, MongoDB, etc.)</li>
+                <li><strong>Infrastructure Type:</strong> Select your cloud or on-premise infrastructure provider (AWS, Azure, GCP, etc.)</li>
+            </ul>
+            <div class="mt-4 bg-gray-50 p-4 rounded-md">
+                <p class="text-sm text-gray-700">
+                    <strong>Tip:</strong> The combination of technologies affects the complexity and therefore the effort required. Our models take these interactions into account.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Step 4: Integration Points -->
+    <div id="step4" class="bg-white shadow overflow-hidden sm:rounded-lg mb-10">
+        <div class="px-4 py-5 sm:px-6 bg-indigo-50">
+            <h2 class="text-xl font-semibold text-gray-900">Step 4: Integration Points</h2>
+        </div>
+        <div class="border-t border-gray-200 px-4 py-5 sm:p-6">
+            <p class="mb-4">
+                Specify the integration points and authentication mechanisms for your application:
+            </p>
+            <ul class="list-disc pl-5 mb-4 space-y-2">
+                <li><strong>Integration Types:</strong> Specify the number of each integration type:
+                    <ul class="list-circle pl-5 mt-1 space-y-1">
+                        <li>REST APIs</li>
+                        <li>SOAP Services</li>
+                        <li>ISO8583 Connections (for financial messaging)</li>
+                        <li>SDK Integrations</li>
+                    </ul>
+                </li>
+                <li><strong>IAM Vendor:</strong> Select your Identity and Access Management solution (Keycloak, Auth0, etc.)</li>
+                <li><strong>Authentication Options:</strong> Enable the authentication methods you'll support:
+                    <ul class="list-circle pl-5 mt-1 space-y-1">
+                        <li>Google SSO</li>
+                        <li>Apple SSO</li>
+                        <li>Facebook SSO</li>
+                    </ul>
+                </li>
+                <li><strong>Payment Provider Integration:</strong> Indicate if you'll be integrating with payment processors</li>
+                <li><strong>FIDO Authentication:</strong> Enable if you'll implement FIDO for passwordless authentication</li>
+                <li><strong>Data Migration:</strong> Enable if your project requires data migration from legacy systems</li>
+            </ul>
+            <div class="mt-4 bg-gray-50 p-4 rounded-md">
+                <p class="text-sm text-gray-700">
+                    <strong>Note:</strong> Integration points are often underestimated in traditional approaches. Our model accounts for the complexity each integration adds to your project.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Step 5: Review and Submit -->
+    <div id="step5" class="bg-white shadow overflow-hidden sm:rounded-lg mb-10">
+        <div class="px-4 py-5 sm:px-6 bg-indigo-50">
+            <h2 class="text-xl font-semibold text-gray-900">Step 5: Review and Submit</h2>
+        </div>
+        <div class="border-t border-gray-200 px-4 py-5 sm:p-6">
+            <p class="mb-4">
+                In this final step, you'll review all the information you've provided about your project:
+            </p>
+            <ul class="list-disc pl-5 mb-4 space-y-2">
+                <li>Verify all project details are correct</li>
+                <li>Make any necessary adjustments by going back to previous steps</li>
+                <li>Select the model type for estimation (if you haven't already):
+                    <ul class="list-circle pl-5 mt-1 space-y-1">
+                        <li><strong>Deep Learning:</strong> Uses LSTM neural networks for high accuracy</li>
+                        <li><strong>Classical ML:</strong> Uses XGBoost for interpretable results</li>
+                        <li><strong>Hybrid (Recommended):</strong> Combines LSTM and XGBoost for optimal accuracy</li>
+                    </ul>
+                </li>
+                <li>Click "Generate Estimate" to process your data and generate effort estimates</li>
+            </ul>
+            <div class="mt-4 bg-gray-50 p-4 rounded-md">
+                <p class="text-sm text-gray-700">
+                    <strong>Tip:</strong> The hybrid model typically provides the most accurate estimates with an R-squared value of 0.9996 in our testing.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Understanding Results -->
+    <div id="results" class="bg-white shadow overflow-hidden sm:rounded-lg mb-10">
+        <div class="px-4 py-5 sm:px-6 bg-indigo-50">
+            <h2 class="text-xl font-semibold text-gray-900">Understanding Results</h2>
+        </div>
+        <div class="border-t border-gray-200 px-4 py-5 sm:p-6">
+            <p class="mb-4">
+                After submitting your project details, you'll receive comprehensive effort estimates:
+            </p>
+            <ul class="list-disc pl-5 mb-4 space-y-2">
+                <li><strong>Total Effort:</strong> The overall person-days required for the project</li>
+                <li><strong>Effort Breakdown:</strong> Detailed breakdown across four dimensions:
+                    <ul class="list-circle pl-5 mt-1 space-y-1">
+                        <li><strong>Delivery:</strong> Project management, coordination, and communication</li>
+                        <li><strong>Engineering:</strong> Core development work including coding and architecture</li>
+                        <li><strong>DevOps:</strong> Infrastructure setup, CI/CD, deployment, and operations</li>
+                        <li><strong>QA:</strong> Testing, quality assurance, and validation</li>
+                    </ul>
+                </li>
+                <li><strong>Visualization:</strong> Charts showing the effort distribution</li>
+                <li><strong>Confidence Level:</strong> Indication of the model's confidence in the estimate</li>
+            </ul>
+            <div class="mt-4 bg-gray-50 p-4 rounded-md">
+                <p class="text-sm text-gray-700">
+                    <strong>Note:</strong> All estimates are provided in person-days, which can be adjusted based on your team's actual capacity and working patterns.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Viewing Estimation History -->
+    <div id="history" class="bg-white shadow overflow-hidden sm:rounded-lg mb-10">
+        <div class="px-4 py-5 sm:px-6 bg-indigo-50">
+            <h2 class="text-xl font-semibold text-gray-900">Viewing Estimation History</h2>
+        </div>
+        <div class="border-t border-gray-200 px-4 py-5 sm:p-6">
+            <p class="mb-4">
+                You can view all your previous estimations in the Estimation History section:
+            </p>
+            <ul class="list-disc pl-5 mb-4 space-y-2">
+                <li>Navigate to the <a href="/Estimate/History" class="text-indigo-600 hover:text-indigo-900">Estimation History</a> page</li>
+                <li>Use filters to search by:
+                    <ul class="list-circle pl-5 mt-1 space-y-1">
+                        <li>Project Name</li>
+                        <li>Region</li>
+                        <li>Date Range (From Date / To Date)</li>
+                    </ul>
+                </li>
+                <li>Click on any estimation to view its detailed results</li>
+                <li>Use the download button to export results as CSV or PDF</li>
+            </ul>
+            <div class="mt-4 bg-gray-50 p-4 rounded-md">
+                <p class="text-sm text-gray-700">
+                    <strong>Tip:</strong> Keep track of your estimations over time to improve your understanding of effort patterns in your organization.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Comparing Estimations -->
+    <div id="comparing" class="bg-white shadow overflow-hidden sm:rounded-lg mb-10">
+        <div class="px-4 py-5 sm:px-6 bg-indigo-50">
+            <h2 class="text-xl font-semibold text-gray-900">Comparing Estimations</h2>
+        </div>
+        <div class="border-t border-gray-200 px-4 py-5 sm:p-6">
+            <p class="mb-4">
+                You can compare different estimation scenarios to understand how changes in project parameters affect the effort:
+            </p>
+            <ul class="list-disc pl-5 mb-4 space-y-2">
+                <li>From the Estimation History page, select two or more estimations to compare</li>
+                <li>Click the "Compare" button to see side-by-side comparison</li>
+                <li>The comparison highlights differences in:
+                    <ul class="list-circle pl-5 mt-1 space-y-1">
+                        <li>Project parameters</li>
+                        <li>Total effort estimates</li>
+                        <li>Effort breakdowns across categories</li>
+                        <li>Model confidence levels</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="mt-4 bg-gray-50 p-4 rounded-md">
+                <p class="text-sm text-gray-700">
+                    <strong>Use Case:</strong> This feature is particularly useful for what-if analysis, helping you understand how adding features or changing technologies impacts your project timeline.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Exporting Results -->
+    <div id="export" class="bg-white shadow overflow-hidden sm:rounded-lg mb-10">
+        <div class="px-4 py-5 sm:px-6 bg-indigo-50">
+            <h2 class="text-xl font-semibold text-gray-900">Exporting Results</h2>
+        </div>
+        <div class="border-t border-gray-200 px-4 py-5 sm:p-6">
+            <p class="mb-4">
+                You can export your estimation results in multiple formats for sharing or further analysis:
+            </p>
+            <ul class="list-disc pl-5 mb-4 space-y-2">
+                <li><strong>CSV Export:</strong> For data analysis in spreadsheet applications</li>
+                <li><strong>PDF Report:</strong> Professional report with visualizations and summaries</li>
+                <li><strong>JSON Export:</strong> For integration with other systems</li>
+            </ul>
+            <p class="mb-4">
+                To export results:
+            </p>
+            <ol class="list-decimal pl-5 mb-4 space-y-2">
+                <li>View a specific estimation result</li>
+                <li>Click the "Export" button in the top-right corner</li>
+                <li>Select your preferred format</li>
+                <li>The file will be downloaded to your device</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Understanding Our Models -->
+    <div id="models" class="bg-white shadow overflow-hidden sm:rounded-lg mb-10">
+        <div class="px-4 py-5 sm:px-6 bg-indigo-50">
+            <h2 class="text-xl font-semibold text-gray-900">Understanding Our Models</h2>
+        </div>
+        <div class="border-t border-gray-200 px-4 py-5 sm:p-6">
+            <p class="mb-4">
+                EffortX offers three types of estimation models, each with its own strengths:
+            </p>
+            <div class="space-y-6">
+                <div>
+                    <h3 class="text-lg font-medium text-gray-900 mb-2">Deep Learning Model (LSTM)</h3>
+                    <ul class="list-disc pl-5 mb-2 space-y-1">
+                        <li>Uses Long Short-Term Memory neural networks</li>
+                        <li>Highly accurate for capturing complex patterns</li>
+                        <li>Achieved R-squared value of 0.99999 in testing</li>
+                        <li>Exceptional for projects with many parameters</li>
+                    </ul>
+                    <p class="text-sm text-gray-600">Best for: Complex projects with many variables and interactions</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-medium text-gray-900 mb-2">Classical Machine Learning (XGBoost)</h3>
+                    <ul class="list-disc pl-5 mb-2 space-y-1">
+                        <li>Uses gradient boosting decision trees</li>
+                        <li>Provides more interpretable results</li>
+                        <li>Achieved R-squared value of 0.982 in testing</li>
+                        <li>Shows which factors most influence the estimation</li>
+                    </ul>
+                    <p class="text-sm text-gray-600">Best for: When you need to understand which factors drive the estimation</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-medium text-gray-900 mb-2">Hybrid Model (Feature-Level Fusion)</h3>
+                    <ul class="list-disc pl-5 mb-2 space-y-1">
+                        <li>Combines LSTM and XGBoost models</li>
+                        <li>Extracts features from LSTM and enhances XGBoost</li>
+                        <li>Achieved R-squared value of 0.9996 in testing</li>
+                        <li>Balances accuracy with interpretability</li>
+                    </ul>
+                    <p class="text-sm text-gray-600">Best for: Most use cases - provides optimal balance of accuracy and insight</p>
+                </div>
+            </div>
+            <div class="mt-6 bg-gray-50 p-4 rounded-md">
+                <p class="text-sm text-gray-700">
+                    <strong>Recommendation:</strong> For most users, we recommend the Hybrid model as it provides the best balance of accuracy and interpretability.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ -->
+    <div id="faq" class="bg-white shadow overflow-hidden sm:rounded-lg mb-10">
+        <div class="px-4 py-5 sm:px-6 bg-indigo-50">
+            <h2 class="text-xl font-semibold text-gray-900">Frequently Asked Questions</h2>
+        </div>
+        <div class="border-t border-gray-200 px-4 py-5 sm:p-6">
+            <div class="space-y-6">
+                <div>
+                    <h3 class="text-lg font-medium text-gray-900">How accurate are the estimations?</h3>
+                    <p class="mt-1 text-gray-600">
+                        Our models have been validated against real-world FinTech projects and have achieved R-squared values up to 0.9996, indicating very high accuracy. The hybrid model typically has the lowest error rates.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-medium text-gray-900">What if my project isn't in the FinTech domain?</h3>
+                    <p class="mt-1 text-gray-600">
+                        While our models are optimized for FinTech projects, they can still provide valuable insights for other software projects with similar characteristics, particularly those with complex compliance, security, or integration requirements.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-medium text-gray-900">Can I adjust the estimates manually?</h3>
+                    <p class="mt-1 text-gray-600">
+                        Yes, after receiving the model's estimation, you can apply adjustment factors based on your organization's specific context, team experience, or other factors not captured by the model.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-medium text-gray-900">How does the system handle projects with unusual characteristics?</h3>
+                    <p class="mt-1 text-gray-600">
+                        For projects with parameters significantly outside the norms in our training data, the system will indicate a lower confidence level in the estimation. In such cases, we recommend using the estimate as a starting point and applying your domain expertise to refine it.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-medium text-gray-900">Can I integrate this with my project management tools?</h3>
+                    <p class="mt-1 text-gray-600">
+                        Yes, we offer API access for enterprise customers to integrate EffortX with project management tools like Jira, Azure DevOps, or custom systems. Contact us for more information about API integration.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Need More Help -->
+    <div class="bg-indigo-50 shadow overflow-hidden sm:rounded-lg mb-10">
+        <div class="px-4 py-5 sm:p-6 text-center">
+            <h2 class="text-xl font-semibold text-gray-900 mb-2">Need Additional Help?</h2>
+            <p class="text-gray-600 mb-4">
+                If you have questions not covered in this guide, please contact our support team.
+            </p>
+            <a href="/Support/Contact" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                Contact Support
+            </a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+}
